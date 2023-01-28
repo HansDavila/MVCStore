@@ -13,9 +13,10 @@ import mx.com.cursodia.jse18.mod2.semana1.FormulaGeneral;
 
 public class Vista extends JFrame
 {
-	private JPanel contentPane;
-	private JButton nuevoBtn_1;
-	private JButton verBtn_1;
+	JPanel contentPane;
+	JButton btnNuevo;
+	JButton btnRegistros;
+	JButton btnEliminar;
 	
 
 	void lanzarGUI()//Lanzar GUI en un hilo
@@ -53,19 +54,20 @@ public class Vista extends JFrame
 		titulo.setBounds(257, 11, 269, 50);
 		contentPane.add(titulo);
 
-		JButton verBtn = new JButton("ELIMINAR JUGUETE");
-		verBtn.setFont(new Font("Tahoma", Font.BOLD, 22));
-		verBtn.setBounds(245, 257, 269, 57);
-		contentPane.add(verBtn);
+		btnEliminar = new JButton("ELIMINAR JUGUETE");
+		btnEliminar.setFont(new Font("Tahoma", Font.BOLD, 22));
+		btnEliminar.setBounds(245, 257, 269, 57);
+		contentPane.add(btnEliminar);
 
-		nuevoBtn_1 = new JButton("NUEVO JUGUETE");
-		nuevoBtn_1.setFont(new Font("Tahoma", Font.BOLD, 22));
-		nuevoBtn_1.setBounds(245, 101, 269, 57);
-		contentPane.add(nuevoBtn_1);
+		btnNuevo = new JButton("NUEVO JUGUETE");
+		btnNuevo.setFont(new Font("Tahoma", Font.BOLD, 22));
+		btnNuevo.setBounds(245, 101, 269, 57);
+		contentPane.add(btnNuevo);
 
-		verBtn_1 = new JButton("VER REGISTROS");
-		verBtn_1.setFont(new Font("Tahoma", Font.BOLD, 22));
-		verBtn_1.setBounds(245, 180, 269, 57);
-		contentPane.add(verBtn_1);
+		btnRegistros = new JButton("VER REGISTROS");
+		btnRegistros.setFont(new Font("Tahoma", Font.BOLD, 22));
+		btnRegistros.setBounds(245, 180, 269, 57);
+		contentPane.add(btnRegistros);
 	}
 }
+
