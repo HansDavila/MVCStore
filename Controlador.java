@@ -42,7 +42,9 @@ public class Controlador implements ActionListener {
 		V.btnNuevo.addActionListener(this);
 		V.btnRegistros.addActionListener(this);
 		V.btnEliminar.addActionListener(this);
+		
 		IV.btnCrear.addActionListener(this);
+		IV.btnCerrarIV.addActionListener(this);
 		
 		
 		/*
@@ -99,6 +101,10 @@ public class Controlador implements ActionListener {
 				
 				
 			}
+			
+		}else if(e.getSource() == IV.btnCerrarIV) 
+		{
+			IV.dispose();
 			
 		}
 		

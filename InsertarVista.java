@@ -1,5 +1,6 @@
 package mx.com.cursodia.jse18.mod2.semana1.tarea;
 
+import java.awt.Color;
 import java.awt.EventQueue;
 import java.awt.Font;
 
@@ -22,6 +23,7 @@ public class InsertarVista extends JFrame
 	JTextField txtCategoria;
 	JTextField txtStock;
 	JButton btnCrear;
+	JButton btnCerrarIV;
 	
 	void lanzarGUI()//Lanzar GUI en un hilo
 	{//delimitador de package
@@ -124,6 +126,13 @@ public class InsertarVista extends JFrame
 		btnCrear.setFont(new Font("Tahoma", Font.BOLD, 21));
 		btnCrear.setBounds(237, 250, 225, 73);
 		contentPane.add(btnCrear);
+		
+		btnCerrarIV = new JButton("CERRAR");
+		btnCerrarIV.setForeground(Color.BLACK);
+		btnCerrarIV.setBackground(new Color(192, 192, 192));
+		btnCerrarIV.setFont(new Font("Tahoma", Font.BOLD, 20));
+		btnCerrarIV.setBounds(286, 355, 128, 61);
+		contentPane.add(btnCerrarIV);
 	}
 	
 }

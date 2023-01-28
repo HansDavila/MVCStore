@@ -9,6 +9,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JButton;
+import java.awt.Color;
 
 public class InsertarPrototipo extends JFrame {
 
@@ -109,9 +110,17 @@ public class InsertarPrototipo extends JFrame {
 		contentPane.add(stock_txt);
 		
 		JButton crearBtn = new JButton("CREAR JUGUETE");
+		crearBtn.setBackground(Color.BLUE);
 		crearBtn.setFont(new Font("Tahoma", Font.BOLD, 21));
 		crearBtn.setBounds(237, 250, 225, 73);
 		contentPane.add(crearBtn);
+		
+		JButton btnCerrarIV = new JButton("CERRAR");
+		btnCerrarIV.setForeground(Color.BLACK);
+		btnCerrarIV.setBackground(new Color(192, 192, 192));
+		btnCerrarIV.setFont(new Font("Tahoma", Font.BOLD, 20));
+		btnCerrarIV.setBounds(286, 355, 128, 61);
+		contentPane.add(btnCerrarIV);
 		
 		
 	}
