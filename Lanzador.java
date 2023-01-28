@@ -7,7 +7,8 @@ public class Lanzador {
 		Modelo M = new Modelo();
 		Vista V = new Vista();
 		InsertarVista IV = new InsertarVista();		
-		Controlador C = new Controlador(V,IV,M);
+		VistaRegistro VR = new VistaRegistro();
+		Controlador C = new Controlador(V,IV,VR,M);
 
 	}
 

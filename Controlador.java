@@ -11,17 +11,20 @@ public class Controlador implements ActionListener {
 	ArrayList<Juguete> Registros = new ArrayList<Juguete>();
 	Vista V;
 	InsertarVista IV;
+	VistaRegistro VR;
 	Modelo M;
 	
 	
-	public Controlador(Vista V, InsertarVista IV, Modelo M )
+	public Controlador(Vista V, InsertarVista IV, VistaRegistro VR, Modelo M)
 	{
 		this.V = V;
 		this.IV = IV;
 		this.M = M;
+		this.VR = VR;
 		
 		this.V.lanzarGUI();
 		this.IV.lanzarGUI();
+		this.VR.lanzarGUI();
 		
 		
 		Escuchadores();
@@ -45,6 +48,11 @@ public class Controlador implements ActionListener {
 		
 		IV.btnCrear.addActionListener(this);
 		IV.btnCerrarIV.addActionListener(this);
+		
+		VR.btnPrimer.addActionListener(this);
+		VR.btnSiguiente.addActionListener(this);
+		VR.btnAnterior.addActionListener(this);
+		VR.btnUltimo.addActionListener(this);
 		
 		
 		/*
@@ -75,10 +83,6 @@ public class Controlador implements ActionListener {
 					System.out.println("\n");
 				}
 			}
-			
-			
-			
-			
 		}else if(e.getSource() == V.btnEliminar) 
 		{
 			JOptionPane.showMessageDialog(V, "presionaste el boton de eliminar juguete");
