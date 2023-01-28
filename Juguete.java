@@ -68,5 +68,11 @@ public class Juguete {
 	public void setStock(int stock) {
 		this.stock = stock;
 	}
+	
+	
+	// Sobreescribiendo Metodo
+		public String toString() {
+			return  "ID: "+ id_jug + "\nNOMBRE:" + nom_jug+ "\nPRECIO:" + pre_jug + "\nMARCA:" + marc_jug + "\nSTOCK" + stock;
+		}
 
 }

@@ -8,7 +8,7 @@ import javax.swing.JOptionPane;
 
 public class Controlador implements ActionListener {
 
-	ArrayList<Juguete> nombreArrayList = new ArrayList<Juguete>();
+	ArrayList<Juguete> Registros = new ArrayList<Juguete>();
 	Vista V;
 	InsertarVista IV;
 	Modelo M;
@@ -59,12 +59,24 @@ public class Controlador implements ActionListener {
 		if(e.getSource() == V.btnNuevo) 
 		{
 			//JOptionPane.showMessageDialog(V, "presionaste el boton de Nuevo Juguete");
+			vaciarCamposIV();
 			IV.setVisible(true);
-			
-			
+
 		}else if(e.getSource() == V.btnRegistros)
 		{
-			JOptionPane.showMessageDialog(V, "presionaste el boton de ver registros");
+			if(Registros.isEmpty()) 
+			{
+				JOptionPane.showMessageDialog(V, "No hay registros de juguetes");
+			}else {
+				for(Juguete jug: Registros) {
+					System.out.println(jug);
+					System.out.println("\n");
+				}
+			}
+			
+			
+			
+			
 		}else if(e.getSource() == V.btnEliminar) 
 		{
 			JOptionPane.showMessageDialog(V, "presionaste el boton de eliminar juguete");
@@ -72,16 +84,34 @@ public class Controlador implements ActionListener {
 		{
 			if(VerificarIV()) 
 			{
-				String Id = IV.txtId.getText();
+				int Id = Integer.parseInt(IV.txtId.getText());
 				String Nombre = IV.txtNombre.getText();
-				float Precio = Float.parseFloat(IV.txtPrecio.getText()) ;
-				System.out.println(Id);
-				System.out.println(Nombre);
-				System.out.println(Precio);
+				float Precio = Float.parseFloat(IV.txtPrecio.getText());
+				String Marca = IV.txtMarca.getText();
+				String Categoria = IV.txtCategoria.getText();
+				int Stock = Integer.parseInt(IV.txtStock.getText());
+												
+				Registros.add(new Juguete(Id, Nombre, Precio, Marca, Categoria, Stock));
+				
+				JOptionPane.showMessageDialog(IV, "Juguete Agregado");
+				
+				IV.dispose();				
+				
+				
 			}
 			
 		}
 		
+	}
+	
+	public void vaciarCamposIV() 
+	{
+		IV.txtId.setText("");
+		IV.txtNombre.setText("");
+		IV.txtPrecio.setText("");
+		IV.txtMarca.setText("");
+		IV.txtCategoria.setText("");
+		IV.txtStock.setText("");
 	}
 	
 	public boolean VerificarIV() 
