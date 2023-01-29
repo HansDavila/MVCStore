@@ -209,4 +209,39 @@ public class VistaRegistro extends JFrame
 		contentPane.add(btnEliminar);
 
 	}
+	
+	public void turnedBlack(JButton boton) 
+	{
+		
+	}
+	
+	public void freeFields() 
+	{
+		txtId.setEditable(true);;
+		txtNombre.setEditable(true);;
+		txtPrecio.setEditable(true);;
+		txtMarca.setEditable(true);
+		txtCategoria.setEditable(true);
+		txtStock.setEditable(true);
+	}
+	
+	public void fillFields(Juguete Toy) 
+	{
+		txtId.setText(Toy.id_jug.toString());
+		txtNombre.setText(Toy.nom_jug.toString());
+		txtPrecio.setText(Toy.pre_jug.toString());
+		txtMarca.setText(Toy.marc_jug.toString());
+		txtCategoria.setText(Toy.catg_jug);
+		txtStock.setText(Toy.stock.toString());
+	}
+	
+	public void vaciarCamposIV() 
+	{
+		txtId.setText("");
+		txtNombre.setText("");
+		txtPrecio.setText("");
+		txtMarca.setText("");
+		txtCategoria.setText("");
+		txtStock.setText("");
+	}
 }
