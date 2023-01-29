@@ -135,4 +135,14 @@ public class InsertarVista extends JFrame
 		contentPane.add(btnCerrarIV);
 	}
 	
+	public void vaciarCamposVI() 
+	{
+		txtId.setText("");
+		txtNombre.setText("");
+		txtPrecio.setText("");
+		txtMarca.setText("");
+		txtCategoria.setText("");
+		txtStock.setText("");
+	}
+	
 }

@@ -235,7 +235,7 @@ public class VistaRegistro extends JFrame
 		txtStock.setText(Toy.stock.toString());
 	}
 	
-	public void vaciarCamposIV() 
+	public void vaciarCamposVR() 
 	{
 		txtId.setText("");
 		txtNombre.setText("");

@@ -69,5 +69,8 @@ public class Vista extends JFrame
 		btnRegistros.setBounds(245, 180, 269, 57);
 		contentPane.add(btnRegistros);
 	}
+	
+	
+	
 }
 

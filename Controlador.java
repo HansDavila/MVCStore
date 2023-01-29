@@ -82,7 +82,7 @@ public class Controlador implements ActionListener {
 		if(e.getSource() == V.btnNuevo) 
 		{
 			//JOptionPane.showMessageDialog(V, "presionaste el boton de Nuevo Juguete");
-			VR.vaciarCamposIV();
+			IV.vaciarCamposVI();
 			IV.setVisible(true);
 
 		}else if(e.getSource() == V.btnRegistros)
