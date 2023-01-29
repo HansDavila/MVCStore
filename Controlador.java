@@ -16,6 +16,7 @@ public class Controlador implements ActionListener {
 	
 	int indexInicio = 0;
 	int indexFin;
+	int pos = 0;
 	
 	
 	public Controlador(Vista V, InsertarVista IV, VistaRegistro VR, Modelo M)
@@ -29,6 +30,7 @@ public class Controlador implements ActionListener {
 		this.IV.lanzarGUI();
 		this.VR.lanzarGUI();
 		
+		createToys();
 		
 		Escuchadores();
 	}
@@ -78,26 +80,21 @@ public class Controlador implements ActionListener {
 
 		}else if(e.getSource() == V.btnRegistros)
 		{
+			//Si los registros estan vacios...
 			if(Registros.isEmpty()) 
 			{
 				JOptionPane.showMessageDialog(V, "No hay registros de juguetes");
 				
 			}else {
-				
+				//Se abre ventana VR y se muestra el primer registro
 				VR.setVisible(true);
-				
-				Juguete Toy;
+								
 				indexFin = Registros.size() - 1;
+										
+				fillFields(Registros.get(pos));
 				
-				Toy = Registros.get(0);
 				
 				
-				VR.txtId.setText(Toy.id_jug.toString());
-				VR.txtNombre.setText(Toy.nom_jug.toString());
-				VR.txtPrecio.setText(Toy.pre_jug.toString());
-				VR.txtMarca.setText(Toy.marc_jug.toString());
-				VR.txtCategoria.setText(Toy.catg_jug);
-				VR.txtStock.setText(Toy.stock.toString());
 				
 			}
 		}else if(e.getSource() == V.btnEliminar) 
@@ -106,6 +103,7 @@ public class Controlador implements ActionListener {
 			
 		}else if(e.getSource() == IV.btnCrear) 
 		{
+			//Se verifica que no se tengan campos vacios
 			if(VerificarIV()) 
 			{
 				int Id = Integer.parseInt(IV.txtId.getText());
@@ -118,16 +116,69 @@ public class Controlador implements ActionListener {
 				Registros.add(new Juguete(Id, Nombre, Precio, Marca, Categoria, Stock));
 				
 				JOptionPane.showMessageDialog(IV, "Juguete Agregado");
+				indexFin = Registros.size() - 1;
 				
 				IV.dispose();				
-				
-				
 			}
 			
 		}else if(e.getSource() == IV.btnCerrarIV) 
 		{
 			IV.dispose();
 			
+		}else if(e.getSource() == VR.btnAnterior) 
+		{
+			if(pos == 0) 
+			{
+				//Si la posicion es la unica que existe
+				if (pos == indexFin) 
+				{
+					//No hacer nada
+				}else 
+				{
+					//el elemento pasa a la ultima posicion
+					pos = indexFin;					
+					fillFields(Registros.get(pos));
+				}
+			}else 
+			{
+				//Caso normal se cambia la posicion a la anterior
+				pos--;
+			
+				fillFields(Registros.get(pos));
+			}
+			
+		}
+		else if(e.getSource() == VR.btnSiguiente) 
+		{
+			if(pos == indexFin) 
+			{
+				//Si solo existe un elemento
+				if (Registros.size() == 1) 
+				{
+					//No hacer nada
+				}else 
+				{
+					//el elemento pasa a la ultima posicion
+					pos = 0;					
+					fillFields(Registros.get(pos));
+				}
+			}else 
+			{
+				//Caso normal, solo se aumenta la posicion 
+				pos++;
+				
+				fillFields(Registros.get(pos));
+			}
+			
+		}else if(e.getSource() == VR.btnPrimer) 
+		{
+			pos = 0;
+			fillFields(Registros.get(pos));
+		}
+		else if(e.getSource() == VR.btnUltimo) 
+		{
+			pos = indexFin;
+			fillFields(Registros.get(pos));
 		}
 		
 	}
@@ -183,6 +234,23 @@ public class Controlador implements ActionListener {
 		}
 		
 		return bandera;
+	}
+	
+	public void fillFields(Juguete Toy) 
+	{
+		VR.txtId.setText(Toy.id_jug.toString());
+		VR.txtNombre.setText(Toy.nom_jug.toString());
+		VR.txtPrecio.setText(Toy.pre_jug.toString());
+		VR.txtMarca.setText(Toy.marc_jug.toString());
+		VR.txtCategoria.setText(Toy.catg_jug);
+		VR.txtStock.setText(Toy.stock.toString());
+	}
+	
+	public void createToys() 
+	{
+		Registros.add(new Juguete(1, "Pelota", 100, "MexiToys", "Basico", 100));
+		Registros.add(new Juguete(2, "Transformer", 600, "Hasbro", "Accion", 20));
+		Registros.add(new Juguete(3, "Barbie", 600, "Matel", "Muñeca", 40));
 	}
 	
 	
