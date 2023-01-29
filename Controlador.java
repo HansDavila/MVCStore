@@ -59,6 +59,11 @@ public class Controlador implements ActionListener {
 		VR.btnSiguiente.addActionListener(this);
 		VR.btnAnterior.addActionListener(this);
 		VR.btnUltimo.addActionListener(this);
+		VR.btnCerrarVR.addActionListener(this);
+		
+		VR.btnModificar.addActionListener(this);
+		VR.btnGuardar.addActionListener(this);
+		VR.btnEliminar.addActionListener(this);
 		
 		
 		/*
@@ -179,6 +184,10 @@ public class Controlador implements ActionListener {
 		{
 			pos = indexFin;
 			fillFields(Registros.get(pos));
+		}else if(e.getSource() == VR.btnCerrarVR) 
+		{
+			VR.dispose();
+			System.out.println("Se presiono cerrar");
 		}
 		
 	}

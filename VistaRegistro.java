@@ -31,6 +31,11 @@ public class VistaRegistro extends JFrame
 	JButton btnUltimo;
 	JButton btnAnterior;
 	JButton btnSiguiente;
+	JButton btnCerrarVR;
+	
+	JButton btnModificar;
+	JButton btnGuardar;
+	JButton btnEliminar;
 	
 	void lanzarGUI()//Lanzar GUI en un hilo
 	{//delimitador de package
@@ -171,6 +176,37 @@ public class VistaRegistro extends JFrame
 		btnSiguiente.setBackground(new Color(102, 102, 255));
 		btnSiguiente.setBounds(405, 363, 116, 30);
 		contentPane.add(btnSiguiente);
+		
+		btnCerrarVR = new JButton("CERRAR");
+		btnCerrarVR.setForeground(new Color(0, 0, 0));
+		btnCerrarVR.setBackground(new Color(192, 192, 192));
+		btnCerrarVR.setFont(new Font("Tahoma", Font.BOLD, 15));
+		btnCerrarVR.setBounds(642, 10, 116, 30);
+		contentPane.add(btnCerrarVR);
+		
+		btnModificar = new JButton("MODIFICAR");
+		btnModificar.setForeground(new Color(255, 255, 255));
+		btnModificar.setBackground(new Color(255, 128, 64));
+		btnModificar.setFont(new Font("Tahoma", Font.BOLD, 15));
+		btnModificar.setBounds(41, 434, 129, 46);
+		contentPane.add(btnModificar);
+		
+		btnGuardar = new JButton("GUARDAR");
+		btnGuardar.setForeground(new Color(255, 255, 255));
+		btnGuardar.setFont(new Font("Tahoma", Font.BOLD, 15));
+		btnGuardar.setBackground(new Color(192, 192, 192));
+		btnGuardar.setBounds(279, 434, 214, 46);
+		btnGuardar.setEnabled(false);
+		contentPane.add(btnGuardar);
+		//btnGuardar.setForeground(new Color(0, 0, 0));
+		//btnGuardar.setBackground(new Color(0, 255, 0));
+		
+		btnEliminar = new JButton("ELIMINAR");
+		btnEliminar.setForeground(new Color(255, 255, 255));
+		btnEliminar.setFont(new Font("Tahoma", Font.BOLD, 15));
+		btnEliminar.setBackground(new Color(255, 0, 0));
+		btnEliminar.setBounds(595, 434, 129, 46);
+		contentPane.add(btnEliminar);
 
 	}
 }
