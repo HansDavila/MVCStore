@@ -20,8 +20,16 @@ public class PrototipoRegistros extends JFrame {
 	JTextField txtMarca;
 	JTextField txtCategoria;
 	JTextField txtStock;
+	
 	JButton btnCrear;
 	JButton btnCerrarIV;
+	
+	JButton btnPrimer;
+	JButton btnUltimo;
+	JButton btnAnterior;
+	JButton btnSiguiente;
+	
+	
 
 	/**
 	 * Launch the application.
@@ -58,63 +66,63 @@ public class PrototipoRegistros extends JFrame {
 
 		txtId = new JTextField();
 		txtId.setFont(new Font("Dialog", Font.ITALIC, 25));
-		txtId.setBounds(375, 79, 163, 20);
+		txtId.setBounds(375, 76, 174, 27);
 		contentPane.add(txtId);
 		txtId.setColumns(10);
 
 		JLabel nom_label = new JLabel("Nombre :");
 		nom_label.setFont(new Font("Arial", Font.BOLD, 25));
-		nom_label.setBounds(231, 113, 137, 20);
+		nom_label.setBounds(228, 127, 137, 20);
 		contentPane.add(nom_label);
 
 		txtNombre = new JTextField();
 		txtNombre.setFont(new Font("Dialog", Font.ITALIC, 25));
 		txtNombre.setColumns(10);
-		txtNombre.setBounds(375, 113, 163, 20);
+		txtNombre.setBounds(375, 122, 174, 27);
 		contentPane.add(txtNombre);
 
 		JLabel pre_label = new JLabel("Precio :");
 		pre_label.setFont(new Font("Arial", Font.BOLD, 25));
-		pre_label.setBounds(231, 144, 137, 20);
+		pre_label.setBounds(228, 170, 137, 20);
 		contentPane.add(pre_label);
 
 		txtPrecio = new JTextField();
 		txtPrecio.setFont(new Font("Dialog", Font.ITALIC, 25));
 		txtPrecio.setColumns(10);
-		txtPrecio.setBounds(375, 144, 163, 20);
+		txtPrecio.setBounds(375, 165, 174, 27);
 		contentPane.add(txtPrecio);
 
 		JLabel marc_label = new JLabel("Marca :");
 		marc_label.setFont(new Font("Arial", Font.BOLD, 25));
-		marc_label.setBounds(231, 175, 137, 20);
+		marc_label.setBounds(228, 213, 137, 20);
 		contentPane.add(marc_label);
 
 		txtMarca = new JTextField();
 		txtMarca.setFont(new Font("Dialog", Font.ITALIC, 25));
 		txtMarca.setColumns(10);
-		txtMarca.setBounds(375, 175, 163, 20);
+		txtMarca.setBounds(375, 208, 174, 27);
 		contentPane.add(txtMarca);
 
 		JLabel catg_label = new JLabel("Categoria :");
 		catg_label.setFont(new Font("Arial", Font.BOLD, 25));
-		catg_label.setBounds(228, 203, 137, 30);
+		catg_label.setBounds(228, 249, 137, 30);
 		contentPane.add(catg_label);
 
 		txtCategoria = new JTextField();
 		txtCategoria.setFont(new Font("Dialog", Font.ITALIC, 25));
 		txtCategoria.setColumns(10);
-		txtCategoria.setBounds(375, 206, 163, 20);
+		txtCategoria.setBounds(375, 249, 174, 27);
 		contentPane.add(txtCategoria);
 
 		JLabel stock_label = new JLabel("Stock :");
 		stock_label.setFont(new Font("Arial", Font.BOLD, 25));
-		stock_label.setBounds(231, 240, 137, 20);
+		stock_label.setBounds(228, 302, 137, 20);
 		contentPane.add(stock_label);
 
 		txtStock = new JTextField();
 		txtStock.setFont(new Font("Dialog", Font.ITALIC, 25));
 		txtStock.setColumns(10);
-		txtStock.setBounds(375, 240, 163, 20);
+		txtStock.setBounds(375, 297, 174, 27);
 		contentPane.add(txtStock);
 		
 		JLabel lblNewLabel = new JLabel("REGISTRO JUGUETES");
@@ -122,32 +130,32 @@ public class PrototipoRegistros extends JFrame {
 		lblNewLabel.setBounds(183, 11, 473, 46);
 		contentPane.add(lblNewLabel);
 		
-		JButton btnNewButton = new JButton("Primer Registro");
-		btnNewButton.setForeground(new Color(255, 255, 255));
-		btnNewButton.setBackground(new Color(102, 102, 255));
-		btnNewButton.setFont(new Font("Tahoma", Font.BOLD, 15));
-		btnNewButton.setBounds(24, 344, 168, 30);
-		contentPane.add(btnNewButton);
+		btnPrimer = new JButton("Primer Registro");
+		btnPrimer.setForeground(new Color(255, 255, 255));
+		btnPrimer.setBackground(new Color(102, 102, 255));
+		btnPrimer.setFont(new Font("Tahoma", Font.BOLD, 15));
+		btnPrimer.setBounds(24, 363, 168, 30);
+		contentPane.add(btnPrimer);
 		
-		JButton btnUltimoRegistro = new JButton("Ultimo Registro");
-		btnUltimoRegistro.setForeground(new Color(255, 255, 255));
-		btnUltimoRegistro.setFont(new Font("Tahoma", Font.BOLD, 15));
-		btnUltimoRegistro.setBackground(new Color(102, 102, 255));
-		btnUltimoRegistro.setBounds(568, 344, 168, 30);
-		contentPane.add(btnUltimoRegistro);
+		btnUltimo = new JButton("Ultimo Registro");
+		btnUltimo.setForeground(new Color(255, 255, 255));
+		btnUltimo.setFont(new Font("Tahoma", Font.BOLD, 15));
+		btnUltimo.setBackground(new Color(102, 102, 255));
+		btnUltimo.setBounds(568, 363, 168, 30);
+		contentPane.add(btnUltimo);
 		
-		JButton btnAnterior = new JButton("Anterior");
+		btnAnterior = new JButton("Anterior");
 		btnAnterior.setForeground(new Color(255, 255, 255));
 		btnAnterior.setFont(new Font("Tahoma", Font.BOLD, 15));
 		btnAnterior.setBackground(new Color(102, 102, 255));
-		btnAnterior.setBounds(249, 344, 116, 30);
+		btnAnterior.setBounds(249, 363, 116, 30);
 		contentPane.add(btnAnterior);
 		
-		JButton btnSiguiente = new JButton("Siguiente");
+		btnSiguiente = new JButton("Siguiente");
 		btnSiguiente.setForeground(new Color(255, 255, 255));
 		btnSiguiente.setFont(new Font("Tahoma", Font.BOLD, 15));
 		btnSiguiente.setBackground(new Color(102, 102, 255));
-		btnSiguiente.setBounds(405, 344, 116, 30);
+		btnSiguiente.setBounds(405, 363, 116, 30);
 		contentPane.add(btnSiguiente);
 	}
 }

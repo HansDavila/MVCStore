@@ -14,6 +14,9 @@ public class Controlador implements ActionListener {
 	VistaRegistro VR;
 	Modelo M;
 	
+	int indexInicio = 0;
+	int indexFin;
+	
 	
 	public Controlador(Vista V, InsertarVista IV, VistaRegistro VR, Modelo M)
 	{
@@ -34,12 +37,13 @@ public class Controlador implements ActionListener {
 	{
 		
 		try {
-			Thread.sleep(200);
+			Thread.sleep(350);
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		IV.setDefaultCloseOperation(IV.DISPOSE_ON_CLOSE);
+		VR.setDefaultCloseOperation(VR.DISPOSE_ON_CLOSE);
 		
 		
 		V.btnNuevo.addActionListener(this);
@@ -77,15 +81,29 @@ public class Controlador implements ActionListener {
 			if(Registros.isEmpty()) 
 			{
 				JOptionPane.showMessageDialog(V, "No hay registros de juguetes");
+				
 			}else {
-				for(Juguete jug: Registros) {
-					System.out.println(jug);
-					System.out.println("\n");
-				}
+				
+				VR.setVisible(true);
+				
+				Juguete Toy;
+				indexFin = Registros.size() - 1;
+				
+				Toy = Registros.get(0);
+				
+				
+				VR.txtId.setText(Toy.id_jug.toString());
+				VR.txtNombre.setText(Toy.nom_jug.toString());
+				VR.txtPrecio.setText(Toy.pre_jug.toString());
+				VR.txtMarca.setText(Toy.marc_jug.toString());
+				VR.txtCategoria.setText(Toy.catg_jug);
+				VR.txtStock.setText(Toy.stock.toString());
+				
 			}
 		}else if(e.getSource() == V.btnEliminar) 
 		{
 			JOptionPane.showMessageDialog(V, "presionaste el boton de eliminar juguete");
+			
 		}else if(e.getSource() == IV.btnCrear) 
 		{
 			if(VerificarIV()) 
@@ -131,29 +149,32 @@ public class Controlador implements ActionListener {
 		{
 			System.out.println("Campo ID vacio");
 			JOptionPane.showMessageDialog(IV, "Campo ID esta vacio");
-			
 			bandera = false;
 			
 		}else if( IV.txtNombre.getText().isEmpty() ) {
 			System.out.println("Campo Nombre vacio");			
 			JOptionPane.showMessageDialog(IV, "Campo Nombre esta vacio");
 			bandera = false;
+			
 		}else if( IV.txtPrecio.getText().isEmpty()) 
 		{
 			System.out.println("Campo Precio vacio");			
 			JOptionPane.showMessageDialog(IV, "Campo Precio esta vacio");
 			bandera = false;
+			
 		}else if( IV.txtMarca.getText().isEmpty()) 
 		{
 			System.out.println("Campo Marca vacio");			
 			JOptionPane.showMessageDialog(IV, "Campo Marca esta vacio");
 			bandera = false;
+			
 		}
 		else if( IV.txtCategoria.getText().isEmpty()) 
 		{
 			System.out.println("Campo Categoria vacio");			
 			JOptionPane.showMessageDialog(IV, "Campo Categoria esta vacio");
 			bandera = false;
+			
 		}else if( IV.txtStock.getText().isEmpty()) 
 		{
 			System.out.println("Campo Stock vacio");			
