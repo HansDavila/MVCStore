@@ -7,6 +7,8 @@ import java.util.ArrayList;
 
 import javax.swing.JOptionPane;
 
+import mx.com.cursodia.jse18.mod1.semana3.Articulo;
+
 public class Controlador implements ActionListener {
 
 	ArrayList<Juguete> Registros = new ArrayList<Juguete>();
@@ -46,6 +48,7 @@ public class Controlador implements ActionListener {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		
 		IV.setDefaultCloseOperation(IV.DISPOSE_ON_CLOSE);
 		VR.setDefaultCloseOperation(VR.DISPOSE_ON_CLOSE);
 		
@@ -99,11 +102,8 @@ public class Controlador implements ActionListener {
 				indexFin = Registros.size() - 1;
 										
 				VR.fillFields(Registros.get(pos));
-				
-				
-				
-				
 			}
+			
 		}else if(e.getSource() == V.btnEliminar) 
 		{
 			JOptionPane.showMessageDialog(V, "presionaste el boton de eliminar juguete");
@@ -196,19 +196,88 @@ public class Controlador implements ActionListener {
 			if(!band) 
 			{
 				VR.btnGuardar.setEnabled(true);
-				VR.btnGuardar.setForeground(new Color(0, 0, 0));
-				VR.btnGuardar.setBackground(new Color(0, 255, 0));
-				VR.btnModificar.setEnabled(false);
-				
+				VR.turnedGreen(VR.btnGuardar);
+				VR.turnedBlack(VR.btnModificar);
+				VR.blockMoveButtons();
+								
 				VR.freeFields();
+				
 				band = true;
 			}else if(band)
 			{
 				VR.btnGuardar.setEnabled(false);
-				VR.btnModificar.setEnabled(true);
+				VR.turnedBlack(VR.btnGuardar);
+				VR.turnedOrange(VR.btnModificar);
+				VR.freeMoveButtons();
 				band = false;
 			}
 			
+		}
+		else if(e.getSource() == VR.btnGuardar) 
+		{
+			int id = Integer.parseInt(VR.txtId.getText());
+			int posicion = 0;			
+			
+			for (Juguete Toy : Registros) {
+
+				if (Toy.getId_jug() == id) {
+					posicion = Registros.indexOf(Toy);
+				}
+			}
+			
+			
+			
+			Juguete jug;
+			
+			int Id = Integer.parseInt(VR.txtId.getText());
+			String Nombre = VR.txtNombre.getText();
+			float Precio = Float.parseFloat(VR.txtPrecio.getText());
+			String Marca = VR.txtMarca.getText();
+			String Categoria = VR.txtCategoria.getText();
+			int Stock = Integer.parseInt(VR.txtStock.getText());
+										
+			jug = new Juguete(Id, Nombre, Precio, Marca, Categoria, Stock);
+			
+			Registros.set(posicion, jug);
+			
+			JOptionPane.showMessageDialog(IV, "Juguete Modificado");
+			
+			VR.turnedBlack(VR.btnGuardar);
+			VR.btnGuardar.setEnabled(false);
+			
+			VR.freeMoveButtons();
+			VR.blockFields();
+			
+			VR.turnedOrange(VR.btnModificar);
+		}
+		else if(e.getSource() == VR.btnEliminar) 
+		{
+			int id = Integer.parseInt(VR.txtId.getText());
+			int posicion = 0;			
+			
+			for (Juguete Toy : Registros) {
+
+				if (Toy.getId_jug() == id) {
+					posicion = Registros.indexOf(Toy);
+				}
+			}
+			
+
+			//QUEDA PENDIENTE BORRARLO
+			//PENDIENTE CHECAR QUE BORRE
+			//PENDIENTE QUE CAMBIEN LOS COLORES
+			//PENDIENTE DE PONERLO EN LA PRIMERA POSICION
+			Registros.remove(posicion);
+			
+			JOptionPane.showMessageDialog(IV, "Juguete Borrado");
+			
+			VR.turnedBlack(VR.btnGuardar);
+			VR.btnGuardar.setEnabled(false);
+			
+			VR.freeMoveButtons();
+			VR.blockFields();
+			
+			VR.turnedOrange(VR.btnModificar);
 		}
 		
 	}

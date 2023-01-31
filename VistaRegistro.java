@@ -210,19 +210,59 @@ public class VistaRegistro extends JFrame
 
 	}
 	
+	
+	
+	public void turnedOrange(JButton boton) 
+	{
+		boton.setForeground(new Color(255, 255, 255));
+		boton.setBackground(new Color(255, 128, 64));
+	}
+	
+	public void turnedGreen(JButton boton) 
+	{
+		boton.setForeground(new Color(0, 0, 0));
+		boton.setBackground(new Color(0, 255, 0));
+	}
 	public void turnedBlack(JButton boton) 
 	{
-		
+		boton.setForeground(new Color(255, 255, 255));
+		boton.setBackground(new Color(192, 192, 192));
 	}
 	
 	public void freeFields() 
 	{
-		txtId.setEditable(true);;
+		
 		txtNombre.setEditable(true);;
 		txtPrecio.setEditable(true);;
 		txtMarca.setEditable(true);
 		txtCategoria.setEditable(true);
 		txtStock.setEditable(true);
+	}
+	
+	public void blockMoveButtons() 
+	{
+		btnAnterior.setEnabled(false);
+		btnSiguiente.setEnabled(false);
+		btnPrimer.setEnabled(false);
+		btnUltimo.setEnabled(false);
+	}
+	
+	public void freeMoveButtons() 
+	{
+		btnAnterior.setEnabled(true);
+		btnSiguiente.setEnabled(true);
+		btnPrimer.setEnabled(true);
+		btnUltimo.setEnabled(true);
+	}
+	
+	public void blockFields() 
+	{
+		txtId.setEditable(false);;
+		txtNombre.setEditable(false);;
+		txtPrecio.setEditable(false);;
+		txtMarca.setEditable(false);
+		txtCategoria.setEditable(false);
+		txtStock.setEditable(false);
 	}
 	
 	public void fillFields(Juguete Toy) 
