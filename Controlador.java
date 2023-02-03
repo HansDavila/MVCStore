@@ -5,6 +5,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
+import javax.swing.JButton;
 import javax.swing.JOptionPane;
 
 import mx.com.cursodia.jse18.mod1.semana3.Articulo;
@@ -101,7 +102,7 @@ public class Controlador implements ActionListener {
 								
 				indexFin = Registros.size() - 1;
 										
-				VR.fillFields(Registros.get(pos));
+				fillFieldsVR(Registros.get(pos));
 			}
 			
 		}else if(e.getSource() == V.btnEliminar) 
@@ -144,14 +145,14 @@ public class Controlador implements ActionListener {
 				{
 					//el elemento pasa a la ultima posicion
 					pos = indexFin;					
-					VR.fillFields(Registros.get(pos));
+					fillFieldsVR(Registros.get(pos));
 				}
 			}else 
 			{
 				//Caso normal se cambia la posicion a la anterior
 				pos--;
 			
-				VR.fillFields(Registros.get(pos));
+				fillFieldsVR(Registros.get(pos));
 			}
 			
 		}
@@ -167,25 +168,25 @@ public class Controlador implements ActionListener {
 				{
 					//el elemento pasa a la ultima posicion
 					pos = 0;					
-					VR.fillFields(Registros.get(pos));
+					fillFieldsVR(Registros.get(pos));
 				}
 			}else 
 			{
 				//Caso normal, solo se aumenta la posicion 
 				pos++;
 				
-				VR.fillFields(Registros.get(pos));
+				fillFieldsVR(Registros.get(pos));
 			}
 			
 		}else if(e.getSource() == VR.btnPrimer) 
 		{
 			pos = 0;
-			VR.fillFields(Registros.get(pos));
+			fillFieldsVR(Registros.get(pos));
 		}
 		else if(e.getSource() == VR.btnUltimo) 
 		{
 			pos = indexFin;
-			VR.fillFields(Registros.get(pos));
+			fillFieldsVR(Registros.get(pos));
 		}else if(e.getSource() == VR.btnCerrarVR) 
 		{
 			VR.dispose();
@@ -196,19 +197,19 @@ public class Controlador implements ActionListener {
 			if(!band) 
 			{
 				VR.btnGuardar.setEnabled(true);
-				VR.turnedGreen(VR.btnGuardar);
-				VR.turnedBlack(VR.btnModificar);
-				VR.blockMoveButtons();
+				turnedGreen(VR.btnGuardar);
+				turnedBlack(VR.btnModificar);
+				blockMoveButtonsVR();
 								
-				VR.freeFields();
+				freeFieldsVR();
 				
 				band = true;
 			}else if(band)
 			{
 				VR.btnGuardar.setEnabled(false);
-				VR.turnedBlack(VR.btnGuardar);
-				VR.turnedOrange(VR.btnModificar);
-				VR.freeMoveButtons();
+				turnedBlack(VR.btnGuardar);
+				turnedOrange(VR.btnModificar);
+				freeMoveButtonsVR();
 				band = false;
 			}
 			
@@ -242,13 +243,13 @@ public class Controlador implements ActionListener {
 			
 			JOptionPane.showMessageDialog(IV, "Juguete Modificado");
 			
-			VR.turnedBlack(VR.btnGuardar);
+			turnedBlack(VR.btnGuardar);
 			VR.btnGuardar.setEnabled(false);
 			
-			VR.freeMoveButtons();
-			VR.blockFields();
+			freeMoveButtonsVR();
+			blockFieldsVR();
 			
-			VR.turnedOrange(VR.btnModificar);
+			turnedOrange(VR.btnModificar);
 		}
 		else if(e.getSource() == VR.btnEliminar) 
 		{
@@ -271,13 +272,13 @@ public class Controlador implements ActionListener {
 			
 			JOptionPane.showMessageDialog(IV, "Juguete Borrado");
 			
-			VR.turnedBlack(VR.btnGuardar);
+			turnedBlack(VR.btnGuardar);
 			VR.btnGuardar.setEnabled(false);
 			
-			VR.freeMoveButtons();
-			VR.blockFields();
+			freeMoveButtonsVR();
+			blockFieldsVR();
 			
-			VR.turnedOrange(VR.btnModificar);
+			turnedOrange(VR.btnModificar);
 		}
 		
 	}
@@ -334,6 +335,79 @@ public class Controlador implements ActionListener {
 		Registros.add(new Juguete(1, "Pelota", 100, "MexiToys", "Basico", 100));
 		Registros.add(new Juguete(2, "Transformer", 600, "Hasbro", "Accion", 20));
 		Registros.add(new Juguete(3, "Barbie", 600, "Matel", "Muñeca", 40));
+	}
+	
+	public void turnedOrange(JButton boton) 
+	{
+		boton.setForeground(new Color(255, 255, 255));
+		boton.setBackground(new Color(255, 128, 64));
+	}
+	
+	public void turnedGreen(JButton boton) 
+	{
+		boton.setForeground(new Color(0, 0, 0));
+		boton.setBackground(new Color(0, 255, 0));
+	}
+	public void turnedBlack(JButton boton) 
+	{
+		boton.setForeground(new Color(255, 255, 255));
+		boton.setBackground(new Color(192, 192, 192));
+	}
+	
+	public void freeFieldsVR() 
+	{
+		
+		VR.txtNombre.setEditable(true);;
+		VR.txtPrecio.setEditable(true);;
+		VR.txtMarca.setEditable(true);
+		VR.txtCategoria.setEditable(true);
+		VR.txtStock.setEditable(true);
+	}
+	
+	public void blockMoveButtonsVR() 
+	{
+		VR.btnAnterior.setEnabled(false);
+		VR.btnSiguiente.setEnabled(false);
+		VR.btnPrimer.setEnabled(false);
+		VR.btnUltimo.setEnabled(false);
+	}
+	
+	public void freeMoveButtonsVR() 
+	{
+		VR.btnAnterior.setEnabled(true);
+		VR.btnSiguiente.setEnabled(true);
+		VR.btnPrimer.setEnabled(true);
+		VR.btnUltimo.setEnabled(true);
+	}
+	
+	public void blockFieldsVR() 
+	{
+		VR.txtId.setEditable(false);;
+		VR.txtNombre.setEditable(false);;
+		VR.txtPrecio.setEditable(false);;
+		VR.txtMarca.setEditable(false);
+		VR.txtCategoria.setEditable(false);
+		VR.txtStock.setEditable(false);
+	}
+	
+	public void fillFieldsVR(Juguete Toy) 
+	{
+		VR.txtId.setText(""+ Toy.id_jug);
+		VR.txtNombre.setText(""+ Toy.nom_jug);
+		VR.txtPrecio.setText(""+ Toy.pre_jug);
+		VR.txtMarca.setText(""+ Toy.marc_jug);
+		VR.txtCategoria.setText(""+ Toy.catg_jug);
+		VR.txtStock.setText(""+ Toy.stock);
+	}
+	
+	public void vaciarCamposVR() 
+	{
+		VR.txtId.setText("");
+		VR.txtNombre.setText("");
+		VR.txtPrecio.setText("");
+		VR.txtMarca.setText("");
+		VR.txtCategoria.setText("");
+		VR.txtStock.setText("");
 	}
 	
 	
