@@ -12,6 +12,9 @@ import mx.com.cursodia.jse18.mod1.semana3.Articulo;
 
 public class Controlador implements ActionListener {
 
+	
+	//QUITAR ESTE ARRAY Y MANEJARLO EN MODELO
+	//QUITAR LOS IF ELSE DE LOS LISTENERS Y PONER PUROS IF
 	ArrayList<Juguete> Registros = new ArrayList<Juguete>();
 	Vista V;
 	InsertarVista IV;
@@ -89,7 +92,9 @@ public class Controlador implements ActionListener {
 			IV.vaciarCamposVI();
 			IV.setVisible(true);
 
-		}else if(e.getSource() == V.btnRegistros)
+		} 
+		
+		if(e.getSource() == V.btnRegistros)
 		{
 			//Si los registros estan vacios...
 			if(Registros.isEmpty()) 
@@ -105,11 +110,15 @@ public class Controlador implements ActionListener {
 				fillFieldsVR(Registros.get(pos));
 			}
 			
-		}else if(e.getSource() == V.btnEliminar) 
+		}
+
+		if(e.getSource() == V.btnEliminar) 
 		{
 			JOptionPane.showMessageDialog(V, "presionaste el boton de eliminar juguete");
 			
-		}else if(e.getSource() == IV.btnCrear) 
+		}
+		
+		if(e.getSource() == IV.btnCrear) 
 		{
 			//Se verifica que no se tengan campos vacios
 			if(VerificarIV()) 
@@ -129,11 +138,15 @@ public class Controlador implements ActionListener {
 				IV.dispose();				
 			}
 			
-		}else if(e.getSource() == IV.btnCerrarIV) 
+		}
+		
+		if(e.getSource() == IV.btnCerrarIV) 
 		{
 			IV.dispose();
 			
-		}else if(e.getSource() == VR.btnAnterior) 
+		}
+		
+		if(e.getSource() == VR.btnAnterior) 
 		{
 			if(pos == 0) 
 			{
@@ -156,7 +169,9 @@ public class Controlador implements ActionListener {
 			}
 			
 		}
-		else if(e.getSource() == VR.btnSiguiente) 
+		
+		
+		if(e.getSource() == VR.btnSiguiente) 
 		{
 			if(pos == indexFin) 
 			{
@@ -178,21 +193,30 @@ public class Controlador implements ActionListener {
 				fillFieldsVR(Registros.get(pos));
 			}
 			
-		}else if(e.getSource() == VR.btnPrimer) 
+		}
+		
+		
+		if(e.getSource() == VR.btnPrimer) 
 		{
 			pos = 0;
 			fillFieldsVR(Registros.get(pos));
 		}
-		else if(e.getSource() == VR.btnUltimo) 
+		
+		
+		if(e.getSource() == VR.btnUltimo) 
 		{
 			pos = indexFin;
 			fillFieldsVR(Registros.get(pos));
-		}else if(e.getSource() == VR.btnCerrarVR) 
+		}
+		
+		if(e.getSource() == VR.btnCerrarVR) 
 		{
 			VR.dispose();
 			System.out.println("Se presiono cerrar");
 		}
-		else if(e.getSource() == VR.btnModificar) 
+		
+		
+		if(e.getSource() == VR.btnModificar) 
 		{
 			if(!band) 
 			{
@@ -204,6 +228,7 @@ public class Controlador implements ActionListener {
 				freeFieldsVR();
 				
 				band = true;
+				System.out.println("BAND -> " + band);
 			}else if(band)
 			{
 				VR.btnGuardar.setEnabled(false);
@@ -211,10 +236,13 @@ public class Controlador implements ActionListener {
 				turnedOrange(VR.btnModificar);
 				freeMoveButtonsVR();
 				band = false;
+				System.out.println("BAND -> " + band);
 			}
 			
 		}
-		else if(e.getSource() == VR.btnGuardar) 
+		
+		
+		if(e.getSource() == VR.btnGuardar) 
 		{
 			int id = Integer.parseInt(VR.txtId.getText());
 			int posicion = 0;			
@@ -250,8 +278,12 @@ public class Controlador implements ActionListener {
 			blockFieldsVR();
 			
 			turnedOrange(VR.btnModificar);
+			
+			band = false;
 		}
-		else if(e.getSource() == VR.btnEliminar) 
+		
+		
+		if(e.getSource() == VR.btnEliminar) 
 		{
 			int id = Integer.parseInt(VR.txtId.getText());
 			int posicion = 0;			
