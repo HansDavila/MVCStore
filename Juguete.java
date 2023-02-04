@@ -2,12 +2,12 @@ package mx.com.cursodia.jse18.mod2.semana1.tarea;
 
 public class Juguete {
 	// Propiedades de Clase
-	int id_jug;
-	String nom_jug;
-	float pre_jug;
-	String marc_jug;
-	String catg_jug;
-	int stock;
+	private int id_jug;
+	private String nom_jug;
+	private float pre_jug;
+	private String marc_jug;
+	private String catg_jug;
+	private int stock;
 
 	// CONSTRUCTOR
 	public Juguete(int id_jug, String nom_jug, float pre_jug, String marc_jug, String catg_jug, int stock) {

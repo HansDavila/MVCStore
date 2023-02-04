@@ -14,8 +14,7 @@ public class Controlador implements ActionListener {
 
 	
 	//QUITAR ESTE ARRAY Y MANEJARLO EN MODELO
-	//QUITAR LOS IF ELSE DE LOS LISTENERS Y PONER PUROS IF
-	ArrayList<Juguete> Registros = new ArrayList<Juguete>();
+	//ArrayList<Juguete> Registros = new ArrayList<Juguete>();
 	Vista V;
 	InsertarVista IV;
 	VistaRegistro VR;
@@ -38,7 +37,7 @@ public class Controlador implements ActionListener {
 		this.IV.lanzarGUI();
 		this.VR.lanzarGUI();
 		
-		createToys();
+		M.createToys();
 		
 		Escuchadores();
 	}
@@ -97,7 +96,7 @@ public class Controlador implements ActionListener {
 		if(e.getSource() == V.btnRegistros)
 		{
 			//Si los registros estan vacios...
-			if(Registros.isEmpty()) 
+			if(M.isRegistrosEmpty()) 
 			{
 				JOptionPane.showMessageDialog(V, "No hay registros de juguetes");
 				
@@ -105,9 +104,9 @@ public class Controlador implements ActionListener {
 				//Se abre ventana VR y se muestra el primer registro
 				VR.setVisible(true);
 								
-				indexFin = Registros.size() - 1;
+				indexFin = M.getRegistrosSize() - 1;
 										
-				fillFieldsVR(Registros.get(pos));
+				fillFieldsVR(M.getJuguete(pos));
 			}
 			
 		}
@@ -130,10 +129,10 @@ public class Controlador implements ActionListener {
 				String Categoria = IV.txtCategoria.getText();
 				int Stock = Integer.parseInt(IV.txtStock.getText());
 												
-				Registros.add(new Juguete(Id, Nombre, Precio, Marca, Categoria, Stock));
+				M.addToy(new Juguete(Id, Nombre, Precio, Marca, Categoria, Stock));
 				
 				JOptionPane.showMessageDialog(IV, "Juguete Agregado");
-				indexFin = Registros.size() - 1;
+				indexFin = M.getRegistrosSize() - 1;
 				
 				IV.dispose();				
 			}
@@ -158,14 +157,14 @@ public class Controlador implements ActionListener {
 				{
 					//el elemento pasa a la ultima posicion
 					pos = indexFin;					
-					fillFieldsVR(Registros.get(pos));
+					fillFieldsVR(M.getJuguete(pos));
 				}
 			}else 
 			{
 				//Caso normal se cambia la posicion a la anterior
 				pos--;
 			
-				fillFieldsVR(Registros.get(pos));
+				fillFieldsVR(M.getJuguete(pos));
 			}
 			
 		}
@@ -176,21 +175,21 @@ public class Controlador implements ActionListener {
 			if(pos == indexFin) 
 			{
 				//Si solo existe un elemento
-				if (Registros.size() == 1) 
+				if (M.getRegistrosSize() == 1) 
 				{
 					//No hacer nada
 				}else 
 				{
 					//el elemento pasa a la ultima posicion
 					pos = 0;					
-					fillFieldsVR(Registros.get(pos));
+					fillFieldsVR(M.getJuguete(pos));
 				}
 			}else 
 			{
 				//Caso normal, solo se aumenta la posicion 
 				pos++;
 				
-				fillFieldsVR(Registros.get(pos));
+				fillFieldsVR(M.getJuguete(pos));
 			}
 			
 		}
@@ -199,14 +198,14 @@ public class Controlador implements ActionListener {
 		if(e.getSource() == VR.btnPrimer) 
 		{
 			pos = 0;
-			fillFieldsVR(Registros.get(pos));
+			fillFieldsVR(M.getJuguete(pos));
 		}
 		
 		
 		if(e.getSource() == VR.btnUltimo) 
 		{
 			pos = indexFin;
-			fillFieldsVR(Registros.get(pos));
+			fillFieldsVR(M.getJuguete(pos));
 		}
 		
 		if(e.getSource() == VR.btnCerrarVR) 
@@ -245,39 +244,35 @@ public class Controlador implements ActionListener {
 		if(e.getSource() == VR.btnGuardar) 
 		{
 			int id = Integer.parseInt(VR.txtId.getText());
-			int posicion = 0;			
 			
-			for (Juguete Toy : Registros) {
-
-				if (Toy.getId_jug() == id) {
-					posicion = Registros.indexOf(Toy);
-				}
+			int posicion = M.getIndexByID(id);
+			
+			
+			if(posicion != 1) 
+			{					
+				int Id = Integer.parseInt(VR.txtId.getText());
+				String Nombre = VR.txtNombre.getText();
+				float Precio = Float.parseFloat(VR.txtPrecio.getText());
+				String Marca = VR.txtMarca.getText();
+				String Categoria = VR.txtCategoria.getText();
+				int Stock = Integer.parseInt(VR.txtStock.getText());
+							
+				//Aqui se modifica el juguete 
+				M.modifyToy(posicion, new Juguete(Id, Nombre, Precio, Marca, Categoria, Stock));
+				
+				JOptionPane.showMessageDialog(IV, "Juguete Modificado");
+				
+				turnedBlack(VR.btnGuardar);
+				VR.btnGuardar.setEnabled(false);
+				
+				freeMoveButtonsVR();
+				blockFieldsVR();
+				
+				turnedOrange(VR.btnModificar);
+			}else {
+				JOptionPane.showMessageDialog(IV, "ERROR CON EL ID DEL JUGUETE");
 			}
 			
-			
-			
-			Juguete jug;
-			
-			int Id = Integer.parseInt(VR.txtId.getText());
-			String Nombre = VR.txtNombre.getText();
-			float Precio = Float.parseFloat(VR.txtPrecio.getText());
-			String Marca = VR.txtMarca.getText();
-			String Categoria = VR.txtCategoria.getText();
-			int Stock = Integer.parseInt(VR.txtStock.getText());
-										
-			jug = new Juguete(Id, Nombre, Precio, Marca, Categoria, Stock);
-			
-			Registros.set(posicion, jug);
-			
-			JOptionPane.showMessageDialog(IV, "Juguete Modificado");
-			
-			turnedBlack(VR.btnGuardar);
-			VR.btnGuardar.setEnabled(false);
-			
-			freeMoveButtonsVR();
-			blockFieldsVR();
-			
-			turnedOrange(VR.btnModificar);
 			
 			band = false;
 		}
@@ -286,21 +281,14 @@ public class Controlador implements ActionListener {
 		if(e.getSource() == VR.btnEliminar) 
 		{
 			int id = Integer.parseInt(VR.txtId.getText());
-			int posicion = 0;			
-			
-			for (Juguete Toy : Registros) {
-
-				if (Toy.getId_jug() == id) {
-					posicion = Registros.indexOf(Toy);
-				}
-			}
+			int posicion = M.getIndexByID(id);
 			
 
 			//QUEDA PENDIENTE BORRARLO
 			//PENDIENTE CHECAR QUE BORRE
 			//PENDIENTE QUE CAMBIEN LOS COLORES
 			//PENDIENTE DE PONERLO EN LA PRIMERA POSICION
-			Registros.remove(posicion);
+			//Registros.remove(posicion);
 			
 			JOptionPane.showMessageDialog(IV, "Juguete Borrado");
 			
@@ -362,12 +350,7 @@ public class Controlador implements ActionListener {
 	
 	
 	
-	public void createToys() 
-	{
-		Registros.add(new Juguete(1, "Pelota", 100, "MexiToys", "Basico", 100));
-		Registros.add(new Juguete(2, "Transformer", 600, "Hasbro", "Accion", 20));
-		Registros.add(new Juguete(3, "Barbie", 600, "Matel", "Muñeca", 40));
-	}
+	
 	
 	public void turnedOrange(JButton boton) 
 	{
@@ -424,12 +407,12 @@ public class Controlador implements ActionListener {
 	
 	public void fillFieldsVR(Juguete Toy) 
 	{
-		VR.txtId.setText(""+ Toy.id_jug);
-		VR.txtNombre.setText(""+ Toy.nom_jug);
-		VR.txtPrecio.setText(""+ Toy.pre_jug);
-		VR.txtMarca.setText(""+ Toy.marc_jug);
-		VR.txtCategoria.setText(""+ Toy.catg_jug);
-		VR.txtStock.setText(""+ Toy.stock);
+		VR.txtId.setText(""+ Toy.getId_jug());
+		VR.txtNombre.setText(""+ Toy.getNom_jug());
+		VR.txtPrecio.setText(""+ Toy.getPre_jug());
+		VR.txtMarca.setText(""+ Toy.getMarc_jug());
+		VR.txtCategoria.setText(""+ Toy.getCatg_jug());
+		VR.txtStock.setText(""+ Toy.getStock());
 	}
 	
 	public void vaciarCamposVR() 
