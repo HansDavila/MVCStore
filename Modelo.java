@@ -77,6 +77,16 @@ public class Modelo
 		Registros.remove(index);
 	}
 	
+	void recorrerRegistro() 
+	{
+		for(Juguete toy: Registros) 
+		{
+			int index = Registros.indexOf(toy);
+			System.out.println("Index : " + index + "  -> Nombre: " + toy.getNom_jug());
+		}
+		System.out.println("\n");
+	}
+	
 	
 	
 }

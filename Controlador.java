@@ -179,7 +179,9 @@ public class Controlador implements ActionListener {
 		
 		if(e.getSource() == VR.btnSiguiente) 
 		{
+			
 			indexActual = M.getIndexOf(Toy);
+
 			
 			if(M.getRegistrosSize() > 0 && indexActual +1 < M.getRegistrosSize())
 			{
@@ -249,6 +251,7 @@ public class Controlador implements ActionListener {
 				
 				band = true;
 				System.out.println("BAND -> " + band);
+				
 			}else if(band)
 			{
 				VR.btnGuardar.setEnabled(false);
@@ -280,7 +283,8 @@ public class Controlador implements ActionListener {
 				int Stock = Integer.parseInt(VR.txtStock.getText());
 							
 				//Aqui se modifica el juguete 
-				M.modifyToy(posicion, new Juguete(Id, Nombre, Precio, Marca, Categoria, Stock));
+				Toy = new Juguete(Id, Nombre, Precio, Marca, Categoria, Stock);
+				M.modifyToy(posicion, Toy);
 				
 				JOptionPane.showMessageDialog(IV, "Juguete Modificado");
 				
@@ -322,6 +326,7 @@ public class Controlador implements ActionListener {
 				
 				turnedOrange(VR.btnModificar);
 				
+				Toy = M.getJuguete(0);
 				fillFieldsVR(M.getJuguete(0));
 				indexActual = 0;
 				indexFin = M.getRegistrosSize() - 1;
