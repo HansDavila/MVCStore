@@ -24,10 +24,11 @@ public class InsertarVista extends JFrame
 	JTextField txtStock;
 	JButton btnCrear;
 	JButton btnCerrarIV;
+	Thread ThreadIV;
 	
 	void lanzarGUI()//Lanzar GUI en un hilo
 	{//delimitador de package
-		EventQueue.invokeLater(new Runnable() 
+		ThreadIV = new Thread(new Runnable() 
 		{
 			public void run() 
 			{
@@ -44,6 +45,8 @@ public class InsertarVista extends JFrame
 				}
 			}
 		});
+		
+		ThreadIV.start();
 	}
 	
 	public void crearInsertarGUI() 

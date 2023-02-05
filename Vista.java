@@ -17,11 +17,12 @@ public class Vista extends JFrame
 	JButton btnNuevo;
 	JButton btnRegistros;
 	JButton btnEliminar;
+	Thread ThreadV;
 	
 
 	void lanzarGUI()//Lanzar GUI en un hilo
 	{//delimitador de package
-		EventQueue.invokeLater(new Runnable() 
+		ThreadV = new Thread(new Runnable() 
 		{
 			public void run() 
 			{
@@ -37,7 +38,11 @@ public class Vista extends JFrame
 				}
 			}
 		});
+		
+		ThreadV.start();
 	}
+	
+	
 	
 	public void crearGUI() 
 	{

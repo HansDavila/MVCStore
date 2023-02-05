@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
 
-import mx.com.cursodia.jse18.mod1.semana3.Articulo;
+
 
 public class Controlador implements ActionListener {
 
@@ -46,12 +46,16 @@ public class Controlador implements ActionListener {
 	
 	private void Escuchadores() 
 	{
-		
-		try {
-			Thread.sleep(350);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+	
+		//Esperar a que todas las GUI's hayan finalizado de crearse
+		while(V.ThreadV.isAlive() == true || VR.ThreadVR.isAlive() == true || IV.ThreadIV.isAlive() == true ) 
+		{
+			try {
+				Thread.sleep(100);				
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 		
 		IV.setDefaultCloseOperation(IV.DO_NOTHING_ON_CLOSE);

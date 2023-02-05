@@ -37,9 +37,11 @@ public class VistaRegistro extends JFrame
 	JButton btnGuardar;
 	JButton btnEliminar;
 	
+	Thread ThreadVR;
+	
 	void lanzarGUI()//Lanzar GUI en un hilo
 	{//delimitador de package
-		EventQueue.invokeLater(new Runnable() 
+		ThreadVR = new Thread(new Runnable() 
 		{
 			public void run() 
 			{
@@ -57,6 +59,8 @@ public class VistaRegistro extends JFrame
 				}
 			}
 		});
+		
+		ThreadVR.start();
 	}
 	
 	public void crearRegistroGUI() 
