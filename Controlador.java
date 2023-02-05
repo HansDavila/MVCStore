@@ -5,20 +5,25 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
+import javax.swing.JButton;
 import javax.swing.JOptionPane;
 
 import mx.com.cursodia.jse18.mod1.semana3.Articulo;
 
 public class Controlador implements ActionListener {
 
-	ArrayList<Juguete> Registros = new ArrayList<Juguete>();
+	
+	//QUITAR ESTE ARRAY Y MANEJARLO EN MODELO
+	//ArrayList<Juguete> Registros = new ArrayList<Juguete>();
 	Vista V;
 	InsertarVista IV;
 	VistaRegistro VR;
 	Modelo M;
+	Juguete Toy;
 	
 	int indexInicio = 0;
 	int indexFin;
+	int indexActual;
 	int pos = 0;
 	boolean band = false;
 	
@@ -34,7 +39,7 @@ public class Controlador implements ActionListener {
 		this.IV.lanzarGUI();
 		this.VR.lanzarGUI();
 		
-		createToys();
+		M.createToys();
 		
 		Escuchadores();
 	}
@@ -49,8 +54,8 @@ public class Controlador implements ActionListener {
 			e.printStackTrace();
 		}
 		
-		IV.setDefaultCloseOperation(IV.DISPOSE_ON_CLOSE);
-		VR.setDefaultCloseOperation(VR.DISPOSE_ON_CLOSE);
+		IV.setDefaultCloseOperation(IV.DO_NOTHING_ON_CLOSE);
+		VR.setDefaultCloseOperation(VR.DO_NOTHING_ON_CLOSE);
 		
 		
 		V.btnNuevo.addActionListener(this);
@@ -88,10 +93,12 @@ public class Controlador implements ActionListener {
 			IV.vaciarCamposVI();
 			IV.setVisible(true);
 
-		}else if(e.getSource() == V.btnRegistros)
+		} 
+		
+		if(e.getSource() == V.btnRegistros)
 		{
 			//Si los registros estan vacios...
-			if(Registros.isEmpty()) 
+			if(M.isRegistrosEmpty()) 
 			{
 				JOptionPane.showMessageDialog(V, "No hay registros de juguetes");
 				
@@ -99,16 +106,30 @@ public class Controlador implements ActionListener {
 				//Se abre ventana VR y se muestra el primer registro
 				VR.setVisible(true);
 								
-				indexFin = Registros.size() - 1;
+				indexFin = M.getRegistrosSize() - 1;
 										
-				VR.fillFields(Registros.get(pos));
+				Toy = M.getJuguete(0);
+				
+				fillFieldsVR(M.getJuguete(pos));
 			}
 			
-		}else if(e.getSource() == V.btnEliminar) 
+		}
+
+		if(e.getSource() == V.btnEliminar) 
 		{
-			JOptionPane.showMessageDialog(V, "presionaste el boton de eliminar juguete");
+			//JOptionPane.showMessageDialog(V, "presionaste el boton de eliminar juguete");
+			int opc  = JOptionPane.showConfirmDialog(V, "Desea eliminar el juguete", "Eliminación de juguete", JOptionPane.YES_OPTION);
 			
-		}else if(e.getSource() == IV.btnCrear) 
+			if(opc == 0) 
+			{
+				System.out.println("Se presiono que si");				
+			}else if(opc == 1) {
+				System.out.println("Se presiono que no");
+			}
+			
+		}
+		
+		if(e.getSource() == IV.btnCrear) 
 		{
 			//Se verifica que no se tengan campos vacios
 			if(VerificarIV()) 
@@ -120,164 +141,201 @@ public class Controlador implements ActionListener {
 				String Categoria = IV.txtCategoria.getText();
 				int Stock = Integer.parseInt(IV.txtStock.getText());
 												
-				Registros.add(new Juguete(Id, Nombre, Precio, Marca, Categoria, Stock));
+				M.addToy(new Juguete(Id, Nombre, Precio, Marca, Categoria, Stock));
 				
 				JOptionPane.showMessageDialog(IV, "Juguete Agregado");
-				indexFin = Registros.size() - 1;
+				indexFin = M.getRegistrosSize() - 1;
 				
 				IV.dispose();				
 			}
 			
-		}else if(e.getSource() == IV.btnCerrarIV) 
+		}
+		
+		if(e.getSource() == IV.btnCerrarIV) 
 		{
 			IV.dispose();
 			
-		}else if(e.getSource() == VR.btnAnterior) 
-		{
-			if(pos == 0) 
-			{
-				//Si la posicion es la unica que existe
-				if (pos == indexFin) 
-				{
-					//No hacer nada
-				}else 
-				{
-					//el elemento pasa a la ultima posicion
-					pos = indexFin;					
-					VR.fillFields(Registros.get(pos));
-				}
-			}else 
-			{
-				//Caso normal se cambia la posicion a la anterior
-				pos--;
-			
-				VR.fillFields(Registros.get(pos));
-			}
-			
 		}
-		else if(e.getSource() == VR.btnSiguiente) 
+		
+		if(e.getSource() == VR.btnAnterior) 
 		{
-			if(pos == indexFin) 
+			
+			indexActual = M.getIndexOf(Toy);
+			
+			if(M.getRegistrosSize() > 0 && indexActual -1 > -1)
 			{
-				//Si solo existe un elemento
-				if (Registros.size() == 1) 
-				{
-					//No hacer nada
-				}else 
-				{
-					//el elemento pasa a la ultima posicion
-					pos = 0;					
-					VR.fillFields(Registros.get(pos));
-				}
-			}else 
+				Toy = M.getJuguete(indexActual - 1);
+				fillFieldsVR(Toy);
+			}
+			else 
 			{
-				//Caso normal, solo se aumenta la posicion 
-				pos++;
+				Toy = M.getLastToy();
+				fillFieldsVR(Toy);
 				
-				VR.fillFields(Registros.get(pos));
 			}
 			
-		}else if(e.getSource() == VR.btnPrimer) 
-		{
-			pos = 0;
-			VR.fillFields(Registros.get(pos));
 		}
-		else if(e.getSource() == VR.btnUltimo) 
+		
+		
+		if(e.getSource() == VR.btnSiguiente) 
 		{
-			pos = indexFin;
-			VR.fillFields(Registros.get(pos));
-		}else if(e.getSource() == VR.btnCerrarVR) 
-		{
-			VR.dispose();
-			System.out.println("Se presiono cerrar");
+			
+			indexActual = M.getIndexOf(Toy);
+
+			
+			if(M.getRegistrosSize() > 0 && indexActual +1 < M.getRegistrosSize())
+			{
+				
+				Toy = M.getJuguete(indexActual + 1);
+				fillFieldsVR(Toy);
+			}
+			else 
+			{
+				System.out.println("false");
+				Toy = M.getJuguete(0);
+				fillFieldsVR(Toy);
+				
+			}
+			
 		}
-		else if(e.getSource() == VR.btnModificar) 
+		
+		
+		if(e.getSource() == VR.btnPrimer) 
+		{
+			Toy = M.getJuguete(0);
+			fillFieldsVR(Toy);
+		}
+		
+		
+		if(e.getSource() == VR.btnUltimo) 
+		{
+			Toy = M.getLastToy();
+			fillFieldsVR(Toy);
+		}
+		
+		if(e.getSource() == VR.btnCerrarVR) 
+		{
+			if(band) {
+				int opc  = JOptionPane.showConfirmDialog(VR, "¿Esta seguro que desea salir sin guardar cambios?", "AVISO", JOptionPane.YES_OPTION, JOptionPane.WARNING_MESSAGE);
+				if (opc == 0) 
+				{
+					VR.setVisible(false);
+					VR.btnGuardar.setEnabled(false);
+					turnedBlack(VR.btnGuardar);
+					turnedOrange(VR.btnModificar);
+					freeMoveButtonsVR();
+					blockFieldsVR();
+					band = false;
+					VR.dispose();
+				}
+				
+			}else {
+				VR.dispose();
+				System.out.println("Se presiono cerrar");
+			}
+			
+			
+		}
+		
+		
+		if(e.getSource() == VR.btnModificar) 
 		{
 			if(!band) 
 			{
 				VR.btnGuardar.setEnabled(true);
-				VR.turnedGreen(VR.btnGuardar);
-				VR.turnedBlack(VR.btnModificar);
-				VR.blockMoveButtons();
+				turnedGreen(VR.btnGuardar);
+				turnedBlack(VR.btnModificar);
+				blockMoveButtonsVR();
 								
-				VR.freeFields();
+				freeFieldsVR();
 				
 				band = true;
+				System.out.println("BAND -> " + band);
+				
 			}else if(band)
 			{
 				VR.btnGuardar.setEnabled(false);
-				VR.turnedBlack(VR.btnGuardar);
-				VR.turnedOrange(VR.btnModificar);
-				VR.freeMoveButtons();
+				turnedBlack(VR.btnGuardar);
+				turnedOrange(VR.btnModificar);
+				freeMoveButtonsVR();
+				blockFieldsVR();
 				band = false;
+				System.out.println("BAND -> " + band);
 			}
 			
 		}
-		else if(e.getSource() == VR.btnGuardar) 
+		
+		
+		if(e.getSource() == VR.btnGuardar) 
 		{
 			int id = Integer.parseInt(VR.txtId.getText());
-			int posicion = 0;			
 			
-			for (Juguete Toy : Registros) {
-
-				if (Toy.getId_jug() == id) {
-					posicion = Registros.indexOf(Toy);
-				}
+			int posicion = M.getIndexByID(id);
+			
+			
+			if(posicion != -1) 
+			{					
+				int Id = Integer.parseInt(VR.txtId.getText());
+				String Nombre = VR.txtNombre.getText();
+				float Precio = Float.parseFloat(VR.txtPrecio.getText());
+				String Marca = VR.txtMarca.getText();
+				String Categoria = VR.txtCategoria.getText();
+				int Stock = Integer.parseInt(VR.txtStock.getText());
+							
+				//Aqui se modifica el juguete 
+				Toy = new Juguete(Id, Nombre, Precio, Marca, Categoria, Stock);
+				M.modifyToy(posicion, Toy);
+				
+				JOptionPane.showMessageDialog(IV, "Juguete Modificado");
+				
+				turnedBlack(VR.btnGuardar);
+				VR.btnGuardar.setEnabled(false);
+				
+				freeMoveButtonsVR();
+				blockFieldsVR();
+				
+				turnedOrange(VR.btnModificar);
+			}else {
+				JOptionPane.showMessageDialog(IV, "ERROR CON EL ID DEL JUGUETE");
 			}
 			
 			
+			band = false;
+		}
+		
+		
+		if(e.getSource() == VR.btnEliminar) 
+		{
+			int id = Integer.parseInt(VR.txtId.getText());
 			
-			Juguete jug;
+			int opc  = JOptionPane.showConfirmDialog(VR, "Desea eliminar el juguete", "Eliminación de juguete", JOptionPane.YES_OPTION);
 			
-			int Id = Integer.parseInt(VR.txtId.getText());
-			String Nombre = VR.txtNombre.getText();
-			float Precio = Float.parseFloat(VR.txtPrecio.getText());
-			String Marca = VR.txtMarca.getText();
-			String Categoria = VR.txtCategoria.getText();
-			int Stock = Integer.parseInt(VR.txtStock.getText());
+			//Si la opcion fue si...
+			if(opc == 0) 
+			{
+				
+				M.deleteToy(M.getIndexByID(id));
+				
+				JOptionPane.showMessageDialog(IV, "Juguete Borrado");
 										
-			jug = new Juguete(Id, Nombre, Precio, Marca, Categoria, Stock);
-			
-			Registros.set(posicion, jug);
-			
-			JOptionPane.showMessageDialog(IV, "Juguete Modificado");
-			
-			VR.turnedBlack(VR.btnGuardar);
-			VR.btnGuardar.setEnabled(false);
-			
-			VR.freeMoveButtons();
-			VR.blockFields();
-			
-			VR.turnedOrange(VR.btnModificar);
-		}
-		else if(e.getSource() == VR.btnEliminar) 
-		{
-			int id = Integer.parseInt(VR.txtId.getText());
-			int posicion = 0;			
-			
-			for (Juguete Toy : Registros) {
-
-				if (Toy.getId_jug() == id) {
-					posicion = Registros.indexOf(Toy);
-				}
+				turnedBlack(VR.btnGuardar);
+				VR.btnGuardar.setEnabled(false);
+				
+				freeMoveButtonsVR();
+				blockFieldsVR();
+				
+				turnedOrange(VR.btnModificar);
+				
+				Toy = M.getJuguete(0);
+				fillFieldsVR(M.getJuguete(0));
+				indexActual = 0;
+				indexFin = M.getRegistrosSize() - 1;
+			} //Si la opcion fue no...
+			else if(opc == 1) {
+				//NO HACER NADA
+				
 			}
 			
-
-			//QUEDA PENDIENTE BORRARLO
-			//PENDIENTE CHECAR QUE BORRE
-			//PENDIENTE QUE CAMBIEN LOS COLORES
-			//PENDIENTE DE PONERLO EN LA PRIMERA POSICION
-			Registros.remove(posicion);
-			
-			JOptionPane.showMessageDialog(IV, "Juguete Borrado");
-			
-			VR.turnedBlack(VR.btnGuardar);
-			VR.btnGuardar.setEnabled(false);
-			
-			VR.freeMoveButtons();
-			VR.blockFields();
-			
-			VR.turnedOrange(VR.btnModificar);
 		}
 		
 	}
@@ -329,11 +387,79 @@ public class Controlador implements ActionListener {
 	
 	
 	
-	public void createToys() 
+	
+	
+	public void turnedOrange(JButton boton) 
 	{
-		Registros.add(new Juguete(1, "Pelota", 100, "MexiToys", "Basico", 100));
-		Registros.add(new Juguete(2, "Transformer", 600, "Hasbro", "Accion", 20));
-		Registros.add(new Juguete(3, "Barbie", 600, "Matel", "Muñeca", 40));
+		boton.setForeground(new Color(255, 255, 255));
+		boton.setBackground(new Color(255, 128, 64));
+	}
+	
+	public void turnedGreen(JButton boton) 
+	{
+		boton.setForeground(new Color(0, 0, 0));
+		boton.setBackground(new Color(0, 255, 0));
+	}
+	public void turnedBlack(JButton boton) 
+	{
+		boton.setForeground(new Color(255, 255, 255));
+		boton.setBackground(new Color(192, 192, 192));
+	}
+	
+	public void freeFieldsVR() 
+	{
+		
+		VR.txtNombre.setEditable(true);;
+		VR.txtPrecio.setEditable(true);;
+		VR.txtMarca.setEditable(true);
+		VR.txtCategoria.setEditable(true);
+		VR.txtStock.setEditable(true);
+	}
+	
+	public void blockMoveButtonsVR() 
+	{
+		VR.btnAnterior.setEnabled(false);
+		VR.btnSiguiente.setEnabled(false);
+		VR.btnPrimer.setEnabled(false);
+		VR.btnUltimo.setEnabled(false);
+	}
+	
+	public void freeMoveButtonsVR() 
+	{
+		VR.btnAnterior.setEnabled(true);
+		VR.btnSiguiente.setEnabled(true);
+		VR.btnPrimer.setEnabled(true);
+		VR.btnUltimo.setEnabled(true);
+	}
+	
+	public void blockFieldsVR() 
+	{
+		VR.txtId.setEditable(false);;
+		VR.txtNombre.setEditable(false);;
+		VR.txtPrecio.setEditable(false);;
+		VR.txtMarca.setEditable(false);
+		VR.txtCategoria.setEditable(false);
+		VR.txtStock.setEditable(false);
+	}
+	
+	public void fillFieldsVR(Juguete Toy) 
+	{
+		VR.txtId.setText(""+ Toy.getId_jug());
+		VR.txtNombre.setText(""+ Toy.getNom_jug());
+		VR.txtPrecio.setText(""+ Toy.getPre_jug());
+		VR.txtMarca.setText(""+ Toy.getMarc_jug());
+		VR.txtCategoria.setText(""+ Toy.getCatg_jug());
+		VR.txtStock.setText(""+ Toy.getStock());
+	}
+	
+	public void vaciarCamposVR() 
+	{
+		VR.txtId.setText("");
+		VR.txtNombre.setText("");
+		VR.txtPrecio.setText("");
+		VR.txtMarca.setText("");
+		VR.txtCategoria.setText("");
+		VR.txtStock.setText("");
 	}
 	
 	

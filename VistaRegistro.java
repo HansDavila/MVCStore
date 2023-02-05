@@ -61,7 +61,7 @@ public class VistaRegistro extends JFrame
 	
 	public void crearRegistroGUI() 
 	{
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 		setBounds(100, 100, 782, 563);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -212,76 +212,5 @@ public class VistaRegistro extends JFrame
 	
 	
 	
-	public void turnedOrange(JButton boton) 
-	{
-		boton.setForeground(new Color(255, 255, 255));
-		boton.setBackground(new Color(255, 128, 64));
-	}
 	
-	public void turnedGreen(JButton boton) 
-	{
-		boton.setForeground(new Color(0, 0, 0));
-		boton.setBackground(new Color(0, 255, 0));
-	}
-	public void turnedBlack(JButton boton) 
-	{
-		boton.setForeground(new Color(255, 255, 255));
-		boton.setBackground(new Color(192, 192, 192));
-	}
-	
-	public void freeFields() 
-	{
-		
-		txtNombre.setEditable(true);;
-		txtPrecio.setEditable(true);;
-		txtMarca.setEditable(true);
-		txtCategoria.setEditable(true);
-		txtStock.setEditable(true);
-	}
-	
-	public void blockMoveButtons() 
-	{
-		btnAnterior.setEnabled(false);
-		btnSiguiente.setEnabled(false);
-		btnPrimer.setEnabled(false);
-		btnUltimo.setEnabled(false);
-	}
-	
-	public void freeMoveButtons() 
-	{
-		btnAnterior.setEnabled(true);
-		btnSiguiente.setEnabled(true);
-		btnPrimer.setEnabled(true);
-		btnUltimo.setEnabled(true);
-	}
-	
-	public void blockFields() 
-	{
-		txtId.setEditable(false);;
-		txtNombre.setEditable(false);;
-		txtPrecio.setEditable(false);;
-		txtMarca.setEditable(false);
-		txtCategoria.setEditable(false);
-		txtStock.setEditable(false);
-	}
-	
-	public void fillFields(Juguete Toy) 
-	{
-		txtId.setText(Toy.id_jug.toString());
-		txtNombre.setText(Toy.nom_jug.toString());
-		txtPrecio.setText(Toy.pre_jug.toString());
-		txtMarca.setText(Toy.marc_jug.toString());
-		txtCategoria.setText(Toy.catg_jug);
-		txtStock.setText(Toy.stock.toString());
-	}
-	
-	public void vaciarCamposVR() 
-	{
-		txtId.setText("");
-		txtNombre.setText("");
-		txtPrecio.setText("");
-		txtMarca.setText("");
-		txtCategoria.setText("");
-		txtStock.setText("");
-	}
 }
