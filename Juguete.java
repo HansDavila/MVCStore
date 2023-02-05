@@ -71,8 +71,8 @@ public class Juguete {
 	
 	
 	// Sobreescribiendo Metodo
-		public String toString() {
-			return  "ID: "+ id_jug + "\nNOMBRE:" + nom_jug+ "\nPRECIO:" + pre_jug + "\nMARCA:" + marc_jug + "\nSTOCK" + stock;
-		}
+	public String toString() {
+		return id_jug + "," + nom_jug + "," + pre_jug + "," + marc_jug + "," + catg_jug + "," +  stock  +"\n";
+	}
 
 }

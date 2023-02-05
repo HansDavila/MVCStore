@@ -64,7 +64,7 @@ public class TextEngine
 		
 	}
 	
-	void writeData(Juguete toy) 
+	void writeData(Object item) 
 	{
 		System.out.println("Entrando en TE");
 		
@@ -77,7 +77,34 @@ public class TextEngine
 			wr = new PrintWriter(bw);
 				
 			
-			wr.write(toy.getId_jug() + "," + toy.getNom_jug() + "," + toy.getPre_jug() + "," + toy.getMarc_jug() + "," + toy.getCatg_jug() + "," +  toy.getStock()  +"\n");
+			wr.write(item.toString());
+			
+			
+						
+			wr.close();
+			bw.close();
+			
+			
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	void writeNewData(Object item) 
+	{
+		System.out.println("Entrando en TE");
+		
+		try {
+			
+			
+			f = new File(route);
+			w = new FileWriter(f);
+			bw = new BufferedWriter(w);
+			wr = new PrintWriter(bw);
+				
+			
+			wr.write(item.toString());
 			
 			
 						

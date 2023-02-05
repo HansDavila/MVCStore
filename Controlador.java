@@ -48,6 +48,8 @@ public class Controlador implements ActionListener {
 		if(M.verifyFolder()) 
 		{
 			M.createFile();
+		}else {
+			M.updateRegistroFile();
 		}
 		
 		
@@ -135,8 +137,7 @@ public class Controlador implements ActionListener {
 			
 			if(opc == 0) 
 			{
-				System.out.println("Se presiono que si");	
-				
+				System.out.println("Se presiono que si");					
 				
 			}else if(opc == 1) {
 				System.out.println("Se presiono que no");
@@ -157,7 +158,7 @@ public class Controlador implements ActionListener {
 				int Stock = Integer.parseInt(IV.txtStock.getText());
 				Toy = new Juguete(Id, Nombre, Precio, Marca, Categoria, Stock);				
 				M.addToy(Toy);
-				M.writeData(Toy);
+				
 				
 				JOptionPane.showMessageDialog(IV, "Juguete Agregado");
 				indexFin = M.getRegistrosSize() - 1;
@@ -301,7 +302,7 @@ public class Controlador implements ActionListener {
 				//Aqui se modifica el juguete 
 				Toy = new Juguete(Id, Nombre, Precio, Marca, Categoria, Stock);
 				M.modifyToy(posicion, Toy);
-				
+				M.updateRegistroFile();
 				JOptionPane.showMessageDialog(IV, "Juguete Modificado");
 				
 				turnedBlack(VR.btnGuardar);
@@ -311,6 +312,7 @@ public class Controlador implements ActionListener {
 				blockFieldsVR();
 				
 				turnedOrange(VR.btnModificar);
+				
 			}else {
 				JOptionPane.showMessageDialog(IV, "ERROR CON EL ID DEL JUGUETE");
 			}
@@ -331,7 +333,7 @@ public class Controlador implements ActionListener {
 			{
 				
 				M.deleteToy(M.getIndexByID(id));
-				
+				M.updateRegistroFile();
 				JOptionPane.showMessageDialog(IV, "Juguete Borrado");
 										
 				turnedBlack(VR.btnGuardar);
@@ -342,10 +344,16 @@ public class Controlador implements ActionListener {
 				
 				turnedOrange(VR.btnModificar);
 				
-				Toy = M.getJuguete(0);
-				fillFieldsVR(M.getJuguete(0));
-				indexActual = 0;
-				indexFin = M.getRegistrosSize() - 1;
+				if(!M.isRegistrosEmpty()) {
+					Toy = M.getJuguete(0);
+					fillFieldsVR(M.getJuguete(0));
+					indexActual = 0;
+					indexFin = M.getRegistrosSize() - 1;
+				}else {
+					JOptionPane.showMessageDialog(IV, "Registros vacios!!\nRegresando a la vista principal");
+					VR.setVisible(false);
+				}
+				
 			} //Si la opcion fue no...
 			else if(opc == 1) {
 				//NO HACER NADA

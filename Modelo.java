@@ -9,11 +9,11 @@ public class Modelo
 	//CAMPOS DE CLASE
 	private ArrayList<Juguete> Registros = new ArrayList<Juguete>();
 	
-	String fileName = "Registros.txt";
-	String route = "./Files/toyStore/";
-	String folderRoute = "Files/toyStore";
+	private String fileName = "Registros.txt";
+	private String route = "./Files/toyStore/";
+	private String folderRoute = "Files/toyStore";
 	
-	TextEngine TE = new TextEngine(folderRoute, route, fileName);
+	private TextEngine TE = new TextEngine(folderRoute, route, fileName);
 	
 	
 	public void createToys() 
@@ -72,6 +72,7 @@ public class Modelo
 	void addToy(Juguete toy) 
 	{
 		Registros.add(toy);
+		TE.writeData(toy);
 	}
 	
 	void modifyToy(int index, Juguete modifiedToy) 
@@ -94,16 +95,20 @@ public class Modelo
 		System.out.println("\n");
 	}
 	
+	void updateRegistroFile() 
+	{
+		TE.writeNewData("");
+		for(Juguete toy: Registros) {
+			TE.writeData(toy);
+		}
+		
+	}
+	
 	void createFile() 
 	{
 		TE.createFile();
 	}
 	
-	void writeData(Juguete toy) 
-	{
-		System.out.println("Entrado en Modelo");
-		TE.writeData(toy);
-	}
 	
 	boolean verifyFolder() 
 	{
