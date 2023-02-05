@@ -117,7 +117,15 @@ public class Controlador implements ActionListener {
 
 		if(e.getSource() == V.btnEliminar) 
 		{
-			JOptionPane.showMessageDialog(V, "presionaste el boton de eliminar juguete");
+			//JOptionPane.showMessageDialog(V, "presionaste el boton de eliminar juguete");
+			int opc  = JOptionPane.showConfirmDialog(V, "Desea eliminar el juguete", "Eliminación de juguete", JOptionPane.YES_OPTION);
+			
+			if(opc == 0) 
+			{
+				System.out.println("Se presiono que si");				
+			}else if(opc == 1) {
+				System.out.println("Se presiono que no");
+			}
 			
 		}
 		
@@ -278,7 +286,30 @@ public class Controlador implements ActionListener {
 		{
 			int id = Integer.parseInt(VR.txtId.getText());
 			
+			int opc  = JOptionPane.showConfirmDialog(VR, "Desea eliminar el juguete", "Eliminación de juguete", JOptionPane.YES_OPTION);
 			
+			if(opc == 0) 
+			{
+				System.out.println("Se presiono que si");
+				M.deleteToy(M.getIndexByID(id));
+				
+				JOptionPane.showMessageDialog(IV, "Juguete Borrado");
+										
+				turnedBlack(VR.btnGuardar);
+				VR.btnGuardar.setEnabled(false);
+				
+				freeMoveButtonsVR();
+				blockFieldsVR();
+				
+				turnedOrange(VR.btnModificar);
+				
+				fillFieldsVR(M.getJuguete(0));
+				indexActual = 0;
+				indexFin = M.getRegistrosSize() - 1;
+			}else if(opc == 1) {
+				//NO HACER NADA
+				System.out.println("Se presiono que no");
+			}
 
 			//QUEDA PENDIENTE BORRARLO
 			//PENDIENTE CHECAR QUE BORRE
@@ -286,21 +317,7 @@ public class Controlador implements ActionListener {
 			//PENDIENTE DE PONERLO EN LA PRIMERA POSICION
 			//Registros.remove(posicion);
 			
-			M.deleteToy(M.getIndexByID(id));
 			
-			JOptionPane.showMessageDialog(IV, "Juguete Borrado");
-									
-			turnedBlack(VR.btnGuardar);
-			VR.btnGuardar.setEnabled(false);
-			
-			freeMoveButtonsVR();
-			blockFieldsVR();
-			
-			turnedOrange(VR.btnModificar);
-			
-			fillFieldsVR(M.getJuguete(0));
-			indexActual = 0;
-			indexFin = M.getRegistrosSize() - 1;
 		}
 		
 	}
