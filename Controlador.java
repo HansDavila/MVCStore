@@ -54,8 +54,8 @@ public class Controlador implements ActionListener {
 			e.printStackTrace();
 		}
 		
-		IV.setDefaultCloseOperation(IV.DISPOSE_ON_CLOSE);
-		VR.setDefaultCloseOperation(VR.DISPOSE_ON_CLOSE);
+		IV.setDefaultCloseOperation(IV.DO_NOTHING_ON_CLOSE);
+		VR.setDefaultCloseOperation(VR.DO_NOTHING_ON_CLOSE);
 		
 		
 		V.btnNuevo.addActionListener(this);
@@ -213,8 +213,26 @@ public class Controlador implements ActionListener {
 		
 		if(e.getSource() == VR.btnCerrarVR) 
 		{
-			VR.dispose();
-			System.out.println("Se presiono cerrar");
+			if(band) {
+				int opc  = JOptionPane.showConfirmDialog(VR, "¿Esta seguro que desea salir sin guardar cambios?", "AVISO", JOptionPane.YES_OPTION, JOptionPane.WARNING_MESSAGE);
+				if (opc == 0) 
+				{
+					VR.setVisible(false);
+					VR.btnGuardar.setEnabled(false);
+					turnedBlack(VR.btnGuardar);
+					turnedOrange(VR.btnModificar);
+					freeMoveButtonsVR();
+					blockFieldsVR();
+					band = false;
+					VR.dispose();
+				}
+				
+			}else {
+				VR.dispose();
+				System.out.println("Se presiono cerrar");
+			}
+			
+			
 		}
 		
 		
@@ -288,9 +306,10 @@ public class Controlador implements ActionListener {
 			
 			int opc  = JOptionPane.showConfirmDialog(VR, "Desea eliminar el juguete", "Eliminación de juguete", JOptionPane.YES_OPTION);
 			
+			//Si la opcion fue si...
 			if(opc == 0) 
 			{
-				System.out.println("Se presiono que si");
+				
 				M.deleteToy(M.getIndexByID(id));
 				
 				JOptionPane.showMessageDialog(IV, "Juguete Borrado");
@@ -306,17 +325,11 @@ public class Controlador implements ActionListener {
 				fillFieldsVR(M.getJuguete(0));
 				indexActual = 0;
 				indexFin = M.getRegistrosSize() - 1;
-			}else if(opc == 1) {
+			} //Si la opcion fue no...
+			else if(opc == 1) {
 				//NO HACER NADA
-				System.out.println("Se presiono que no");
+				
 			}
-
-			//QUEDA PENDIENTE BORRARLO
-			//PENDIENTE CHECAR QUE BORRE
-			//PENDIENTE QUE CAMBIEN LOS COLORES
-			//PENDIENTE DE PONERLO EN LA PRIMERA POSICION
-			//Registros.remove(posicion);
-			
 			
 		}
 		
