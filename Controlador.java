@@ -40,7 +40,7 @@ public class Controlador implements ActionListener {
 		this.IV.lanzarGUI();
 		this.VR.lanzarGUI();
 		
-		M.createToys();
+		//M.createToys();
 		
 		Escuchadores();
 		
@@ -48,8 +48,9 @@ public class Controlador implements ActionListener {
 		if(M.verifyFolder()) 
 		{
 			M.createFile();
-		}else {
-			M.updateRegistroFile();
+		}else {	
+			
+			M.readRegistrosFile();;
 		}
 		
 		
@@ -68,6 +69,7 @@ public class Controlador implements ActionListener {
 				e.printStackTrace();
 			}
 		}
+		
 		
 		IV.setDefaultCloseOperation(IV.DO_NOTHING_ON_CLOSE);
 		VR.setDefaultCloseOperation(VR.DO_NOTHING_ON_CLOSE);

@@ -1,10 +1,19 @@
 package mx.com.cursodia.jse18.mod2.semana1.tarea;
 
+import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.io.PrintWriter;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.ArrayList;
+
+import javax.swing.JOptionPane;
 
 import mx.com.cursodia.jse18.mod1.diagnostico.pruebas.Archivero;
 
@@ -89,6 +98,40 @@ public class TextEngine
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+	}
+	
+	ArrayList<String> readData() 
+	{
+		Path ruta = Paths.get(route);
+		int cont = 0;
+		ArrayList<String> lectura = new ArrayList<String>();
+
+		// Validar ruta
+		if (Files.exists(ruta)) {
+			try {
+				BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(route), "utf-8"));
+				String linea = null;
+				int i = 1;
+				while ((linea = br.readLine()) != null) {
+
+					lectura.add(linea);
+					System.out.println(linea);
+					System.out.println("");
+					
+				}
+					i++;
+
+				
+				br.close();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+
+		} else {
+			JOptionPane.showMessageDialog(null, "Error! el archivo o ruta no existen!");		
+			
+		}
+		return lectura;		
 	}
 	
 	void writeNewData(Object item) 
