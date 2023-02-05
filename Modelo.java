@@ -22,6 +22,12 @@ public class Modelo
 		return Registros.get(index);
 	}
 	
+	Juguete getLastToy() 
+	{
+		//Se devuelve el ultimo elemento de los registros	
+		return Registros.get(Registros.size() -1);
+	}
+	
 	int getRegistrosSize() 
 	{
 		return Registros.size();
@@ -64,6 +70,11 @@ public class Modelo
 	void modifyToy(int index, Juguete modifiedToy) 
 	{
 		Registros.set(index, modifiedToy);
+	}
+	
+	void deleteToy(int index) 
+	{
+		Registros.remove(index);
 	}
 	
 	

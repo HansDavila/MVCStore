@@ -19,9 +19,11 @@ public class Controlador implements ActionListener {
 	InsertarVista IV;
 	VistaRegistro VR;
 	Modelo M;
+	Juguete Toy;
 	
 	int indexInicio = 0;
 	int indexFin;
+	int indexActual;
 	int pos = 0;
 	boolean band = false;
 	
@@ -106,6 +108,8 @@ public class Controlador implements ActionListener {
 								
 				indexFin = M.getRegistrosSize() - 1;
 										
+				Toy = M.getJuguete(0);
+				
 				fillFieldsVR(M.getJuguete(pos));
 			}
 			
@@ -147,24 +151,19 @@ public class Controlador implements ActionListener {
 		
 		if(e.getSource() == VR.btnAnterior) 
 		{
-			if(pos == 0) 
-			{
-				//Si la posicion es la unica que existe
-				if (pos == indexFin) 
-				{
-					//No hacer nada
-				}else 
-				{
-					//el elemento pasa a la ultima posicion
-					pos = indexFin;					
-					fillFieldsVR(M.getJuguete(pos));
-				}
-			}else 
-			{
-				//Caso normal se cambia la posicion a la anterior
-				pos--;
 			
-				fillFieldsVR(M.getJuguete(pos));
+			indexActual = M.getIndexOf(Toy);
+			
+			if(M.getRegistrosSize() > 0 && indexActual -1 > -1)
+			{
+				Toy = M.getJuguete(indexActual - 1);
+				fillFieldsVR(Toy);
+			}
+			else 
+			{
+				Toy = M.getLastToy();
+				fillFieldsVR(Toy);
+				
 			}
 			
 		}
@@ -172,24 +171,20 @@ public class Controlador implements ActionListener {
 		
 		if(e.getSource() == VR.btnSiguiente) 
 		{
-			if(pos == indexFin) 
+			indexActual = M.getIndexOf(Toy);
+			
+			if(M.getRegistrosSize() > 0 && indexActual +1 < M.getRegistrosSize())
 			{
-				//Si solo existe un elemento
-				if (M.getRegistrosSize() == 1) 
-				{
-					//No hacer nada
-				}else 
-				{
-					//el elemento pasa a la ultima posicion
-					pos = 0;					
-					fillFieldsVR(M.getJuguete(pos));
-				}
-			}else 
-			{
-				//Caso normal, solo se aumenta la posicion 
-				pos++;
 				
-				fillFieldsVR(M.getJuguete(pos));
+				Toy = M.getJuguete(indexActual + 1);
+				fillFieldsVR(Toy);
+			}
+			else 
+			{
+				System.out.println("false");
+				Toy = M.getJuguete(0);
+				fillFieldsVR(Toy);
+				
 			}
 			
 		}
@@ -197,15 +192,15 @@ public class Controlador implements ActionListener {
 		
 		if(e.getSource() == VR.btnPrimer) 
 		{
-			pos = 0;
-			fillFieldsVR(M.getJuguete(pos));
+			Toy = M.getJuguete(0);
+			fillFieldsVR(Toy);
 		}
 		
 		
 		if(e.getSource() == VR.btnUltimo) 
 		{
-			pos = indexFin;
-			fillFieldsVR(M.getJuguete(pos));
+			Toy = M.getLastToy();
+			fillFieldsVR(Toy);
 		}
 		
 		if(e.getSource() == VR.btnCerrarVR) 
@@ -234,6 +229,7 @@ public class Controlador implements ActionListener {
 				turnedBlack(VR.btnGuardar);
 				turnedOrange(VR.btnModificar);
 				freeMoveButtonsVR();
+				blockFieldsVR();
 				band = false;
 				System.out.println("BAND -> " + band);
 			}
@@ -248,7 +244,7 @@ public class Controlador implements ActionListener {
 			int posicion = M.getIndexByID(id);
 			
 			
-			if(posicion != 1) 
+			if(posicion != -1) 
 			{					
 				int Id = Integer.parseInt(VR.txtId.getText());
 				String Nombre = VR.txtNombre.getText();
@@ -281,7 +277,7 @@ public class Controlador implements ActionListener {
 		if(e.getSource() == VR.btnEliminar) 
 		{
 			int id = Integer.parseInt(VR.txtId.getText());
-			int posicion = M.getIndexByID(id);
+			
 			
 
 			//QUEDA PENDIENTE BORRARLO
@@ -290,8 +286,10 @@ public class Controlador implements ActionListener {
 			//PENDIENTE DE PONERLO EN LA PRIMERA POSICION
 			//Registros.remove(posicion);
 			
-			JOptionPane.showMessageDialog(IV, "Juguete Borrado");
+			M.deleteToy(M.getIndexByID(id));
 			
+			JOptionPane.showMessageDialog(IV, "Juguete Borrado");
+									
 			turnedBlack(VR.btnGuardar);
 			VR.btnGuardar.setEnabled(false);
 			
@@ -299,6 +297,10 @@ public class Controlador implements ActionListener {
 			blockFieldsVR();
 			
 			turnedOrange(VR.btnModificar);
+			
+			fillFieldsVR(M.getJuguete(0));
+			indexActual = 0;
+			indexFin = M.getRegistrosSize() - 1;
 		}
 		
 	}
