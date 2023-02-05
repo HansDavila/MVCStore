@@ -6,8 +6,15 @@ import java.util.ArrayList;
 public class Modelo 
 {
 
+	//CAMPOS DE CLASE
 	private ArrayList<Juguete> Registros = new ArrayList<Juguete>();
-	TextEngine TE = new TextEngine();
+	
+	String fileName = "Registros.txt";
+	String route = "./Files/toyStore/";
+	String folderRoute = "Files/toyStore";
+	
+	TextEngine TE = new TextEngine(folderRoute, route, fileName);
+	
 	
 	public void createToys() 
 	{

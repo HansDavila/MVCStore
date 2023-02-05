@@ -16,15 +16,22 @@ public class TextEngine
 	PrintWriter wr;
 	Archivero A = new Archivero();
 	
-	String fileName = "Registros.txt";
-	String route = "./Files/toyStore/";
-	String folderRoute = "Files/toyStore";
+	String fileName;
+	String route ;
+	String folderRoute;
 
 	private int cont = 0;
 	
 	
 	//CONSTRUCTOR
-	
+	public TextEngine(String folderRoute, String route, String fileName) {
+		this.fileName = fileName;
+		this.route = route + fileName;
+		this.folderRoute = folderRoute;
+		
+		
+	}
+
 	public boolean verifyFolder() 
 	{
 		if(A.isFolderEmpty(folderRoute)) {
@@ -37,8 +44,7 @@ public class TextEngine
 	}
 	public void createFile() 
 	{
-		route += fileName;
-		
+
 		//Se escribe secuencia de numeros en el archivo de texto
 		try {
 					
@@ -46,11 +52,7 @@ public class TextEngine
 		w = new FileWriter(f);
 		bw = new BufferedWriter(w);
 		wr = new PrintWriter(bw);
-			
-		
-		
-		
-					
+				
 		wr.close();
 		bw.close();
 					
@@ -65,6 +67,7 @@ public class TextEngine
 	void writeData(Juguete toy) 
 	{
 		System.out.println("Entrando en TE");
+		
 		try {
 			
 			

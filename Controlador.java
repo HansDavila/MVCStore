@@ -44,11 +44,12 @@ public class Controlador implements ActionListener {
 		
 		Escuchadores();
 		
+		//Creacion del archivo de texto
 		if(M.verifyFolder()) 
 		{
 			M.createFile();
 		}
-		M.verifyFolder();
+		
 		
 	}
 	
