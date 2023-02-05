@@ -7,7 +7,7 @@ public class Modelo
 {
 
 	private ArrayList<Juguete> Registros = new ArrayList<Juguete>();
-	
+	TextEngine TE = new TextEngine();
 	
 	public void createToys() 
 	{
@@ -85,6 +85,22 @@ public class Modelo
 			System.out.println("Index : " + index + "  -> Nombre: " + toy.getNom_jug());
 		}
 		System.out.println("\n");
+	}
+	
+	void createFile() 
+	{
+		TE.createFile();
+	}
+	
+	void writeData(Juguete toy) 
+	{
+		System.out.println("Entrado en Modelo");
+		TE.writeData(toy);
+	}
+	
+	boolean verifyFolder() 
+	{
+		return TE.verifyFolder();
 	}
 	
 	

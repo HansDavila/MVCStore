@@ -21,6 +21,7 @@ public class Controlador implements ActionListener {
 	Modelo M;
 	Juguete Toy;
 	
+	
 	int indexInicio = 0;
 	int indexFin;
 	int indexActual;
@@ -42,6 +43,13 @@ public class Controlador implements ActionListener {
 		M.createToys();
 		
 		Escuchadores();
+		
+		if(M.verifyFolder()) 
+		{
+			M.createFile();
+		}
+		M.verifyFolder();
+		
 	}
 	
 	private void Escuchadores() 
@@ -126,7 +134,9 @@ public class Controlador implements ActionListener {
 			
 			if(opc == 0) 
 			{
-				System.out.println("Se presiono que si");				
+				System.out.println("Se presiono que si");	
+				
+				
 			}else if(opc == 1) {
 				System.out.println("Se presiono que no");
 			}
@@ -144,8 +154,9 @@ public class Controlador implements ActionListener {
 				String Marca = IV.txtMarca.getText();
 				String Categoria = IV.txtCategoria.getText();
 				int Stock = Integer.parseInt(IV.txtStock.getText());
-												
-				M.addToy(new Juguete(Id, Nombre, Precio, Marca, Categoria, Stock));
+				Toy = new Juguete(Id, Nombre, Precio, Marca, Categoria, Stock);				
+				M.addToy(Toy);
+				M.writeData(Toy);
 				
 				JOptionPane.showMessageDialog(IV, "Juguete Agregado");
 				indexFin = M.getRegistrosSize() - 1;
