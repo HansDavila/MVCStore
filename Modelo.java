@@ -2,6 +2,8 @@ package mx.com.cursodia.jse18.mod2.semana1.tarea;
 
 import java.util.ArrayList;
 
+import recursos.TextEngine;
+
 
 public class Modelo 
 {
@@ -69,12 +71,6 @@ public class Modelo
 		}
 	}
 	
-	void addToy(Juguete toy) 
-	{
-		Registros.add(toy);
-		TE.writeData(toy);
-	}
-	
 	void modifyToy(int index, Juguete modifiedToy) 
 	{
 		Registros.set(index, modifiedToy);
@@ -85,6 +81,12 @@ public class Modelo
 		Registros.remove(index);
 	}
 	
+	void addToy(Juguete toy) 
+	{
+		Registros.add(toy);
+		TE.writeData(toy);
+	}
+
 	void recorrerRegistro() 
 	{
 		for(Juguete toy: Registros) 
