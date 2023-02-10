@@ -21,6 +21,7 @@ public class Controlador implements ActionListener {
 	Modelo M;
 	Juguete Toy;
 	
+	
 	int indexInicio = 0;
 	int indexFin;
 	int indexActual;
@@ -39,9 +40,20 @@ public class Controlador implements ActionListener {
 		this.IV.lanzarGUI();
 		this.VR.lanzarGUI();
 		
-		M.createToys();
+		//M.createToys();
 		
 		Escuchadores();
+		
+		//Creacion del archivo de texto
+		if(M.verifyFolder()) 
+		{
+			M.createFile();
+		}else {	
+			
+			M.readRegistrosFile();;
+		}
+		
+		
 	}
 	
 	private void Escuchadores() 
@@ -57,6 +69,7 @@ public class Controlador implements ActionListener {
 				e.printStackTrace();
 			}
 		}
+		
 		
 		IV.setDefaultCloseOperation(IV.DO_NOTHING_ON_CLOSE);
 		VR.setDefaultCloseOperation(VR.DO_NOTHING_ON_CLOSE);
@@ -126,7 +139,8 @@ public class Controlador implements ActionListener {
 			
 			if(opc == 0) 
 			{
-				System.out.println("Se presiono que si");				
+				System.out.println("Se presiono que si");					
+				
 			}else if(opc == 1) {
 				System.out.println("Se presiono que no");
 			}
@@ -144,8 +158,9 @@ public class Controlador implements ActionListener {
 				String Marca = IV.txtMarca.getText();
 				String Categoria = IV.txtCategoria.getText();
 				int Stock = Integer.parseInt(IV.txtStock.getText());
-												
-				M.addToy(new Juguete(Id, Nombre, Precio, Marca, Categoria, Stock));
+				Toy = new Juguete(Id, Nombre, Precio, Marca, Categoria, Stock);				
+				M.addToy(Toy);
+				
 				
 				JOptionPane.showMessageDialog(IV, "Juguete Agregado");
 				indexFin = M.getRegistrosSize() - 1;
@@ -289,7 +304,7 @@ public class Controlador implements ActionListener {
 				//Aqui se modifica el juguete 
 				Toy = new Juguete(Id, Nombre, Precio, Marca, Categoria, Stock);
 				M.modifyToy(posicion, Toy);
-				
+				M.updateRegistroFile();
 				JOptionPane.showMessageDialog(IV, "Juguete Modificado");
 				
 				turnedBlack(VR.btnGuardar);
@@ -299,6 +314,7 @@ public class Controlador implements ActionListener {
 				blockFieldsVR();
 				
 				turnedOrange(VR.btnModificar);
+				
 			}else {
 				JOptionPane.showMessageDialog(IV, "ERROR CON EL ID DEL JUGUETE");
 			}
@@ -319,7 +335,7 @@ public class Controlador implements ActionListener {
 			{
 				
 				M.deleteToy(M.getIndexByID(id));
-				
+				M.updateRegistroFile();
 				JOptionPane.showMessageDialog(IV, "Juguete Borrado");
 										
 				turnedBlack(VR.btnGuardar);
@@ -330,10 +346,16 @@ public class Controlador implements ActionListener {
 				
 				turnedOrange(VR.btnModificar);
 				
-				Toy = M.getJuguete(0);
-				fillFieldsVR(M.getJuguete(0));
-				indexActual = 0;
-				indexFin = M.getRegistrosSize() - 1;
+				if(!M.isRegistrosEmpty()) {
+					Toy = M.getJuguete(0);
+					fillFieldsVR(M.getJuguete(0));
+					indexActual = 0;
+					indexFin = M.getRegistrosSize() - 1;
+				}else {
+					JOptionPane.showMessageDialog(IV, "Registros vacios!!\nRegresando a la vista principal");
+					VR.setVisible(false);
+				}
+				
 			} //Si la opcion fue no...
 			else if(opc == 1) {
 				//NO HACER NADA

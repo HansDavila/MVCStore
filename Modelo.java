@@ -6,7 +6,14 @@ import java.util.ArrayList;
 public class Modelo 
 {
 
+	//CAMPOS DE CLASE
 	private ArrayList<Juguete> Registros = new ArrayList<Juguete>();
+	
+	private String fileName = "Registros.txt";
+	private String route = "./Files/toyStore/";
+	private String folderRoute = "Files/toyStore";
+	
+	private TextEngine TE = new TextEngine(folderRoute, route, fileName);
 	
 	
 	public void createToys() 
@@ -65,6 +72,7 @@ public class Modelo
 	void addToy(Juguete toy) 
 	{
 		Registros.add(toy);
+		TE.writeData(toy);
 	}
 	
 	void modifyToy(int index, Juguete modifiedToy) 
@@ -85,6 +93,71 @@ public class Modelo
 			System.out.println("Index : " + index + "  -> Nombre: " + toy.getNom_jug());
 		}
 		System.out.println("\n");
+	}
+	
+	void updateRegistroFile() 
+	{
+		TE.writeNewData("");
+		for(Juguete toy: Registros) {
+			TE.writeData(toy);
+		}
+	}
+	
+	
+	
+	//METODO Que recibe strings con los objetos del archivo de texto y los convierte en objetos juguetes
+	void readRegistrosFile() {		
+		ArrayList<String> lectura = TE.readData();
+		int indexes[] = new int[lectura.size()];
+		int i = 0;
+		
+		for(String line:lectura) {
+			System.out.println("M -> " + line);
+			if(line.equals("")) {
+				
+				i++;
+			}
+		}
+		
+		
+		
+		System.out.println(i);
+		
+		
+		
+		try {
+			
+			for(String item: lectura ) {
+				if(i == 1) {
+					i++;
+				}else {
+					String[] lineaActual = item.split(",");
+					System.out.println("[A] -> " + item);
+					//System.out.println("Añadido");
+					Registros.add(new Juguete(Integer.parseInt(lineaActual[0]), lineaActual[1], Float.parseFloat(lineaActual[2]), lineaActual[3], lineaActual[4], Integer.parseInt(lineaActual[5])));
+				}
+				
+			}
+			
+		} catch (NumberFormatException e) {
+			// TODO: handle exception
+			System.out.println("File Vacio");
+		}
+		
+		
+		
+		
+	}
+	
+	void createFile() 
+	{
+		TE.createFile();
+	}
+	
+	
+	boolean verifyFolder() 
+	{
+		return TE.verifyFolder();
 	}
 	
 	
@@ -119,4 +192,12 @@ public static void main(String[] args) {
     System.out.println("\nFirst : " + first + " Second " + second + "Third" + third
                        + ", Last : " + last);
 }
+
+
+
+1,Pelota,100.0,MexiToys,Basico,100
+2,Transformer,600.0,Hasbro,Accion,20
+3,Barbie,600.0,Matel,Muñeca,40
+4,Lego Batman,1200.0,Lego,Construccion,55
+
 */

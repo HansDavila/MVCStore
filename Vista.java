@@ -62,7 +62,7 @@ public class Vista extends JFrame
 		btnEliminar = new JButton("ELIMINAR JUGUETE");
 		btnEliminar.setFont(new Font("Tahoma", Font.BOLD, 22));
 		btnEliminar.setBounds(245, 257, 269, 57);
-		contentPane.add(btnEliminar);
+		//contentPane.add(btnEliminar);
 
 		btnNuevo = new JButton("NUEVO JUGUETE");
 		btnNuevo.setFont(new Font("Tahoma", Font.BOLD, 22));
