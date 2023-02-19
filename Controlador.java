@@ -8,6 +8,8 @@ import java.util.ArrayList;
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
 
+import jugueteria.Juguete;
+
 
 
 public class Controlador implements ActionListener {
