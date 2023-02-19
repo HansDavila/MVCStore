@@ -12,6 +12,12 @@ public class Modelo
 	Jugueteria J = new Jugueteria();
 
 	
+	public Modelo() 
+	{
+		//METODO Que recibe strings con los objetos del archivo de texto y los convierte en objetos juguetes
+		J.readRegistrosFile();
+	}
+	
 	Juguete getJuguete(int index) 
 	{
 		return J.getJuguete(index);
@@ -63,24 +69,17 @@ public class Modelo
 		J.addToy(toy);
 	}
 	
+	public void updateRegistroFile() 
+	{
+		J.updateRegistroFile();
+	}
+	
 	
 
-	//METODO Que recibe strings con los objetos del archivo de texto y los convierte en objetos juguetes
-	void readRegistrosFile() {		
-		J.readRegistrosFile();		
-	}
 	
-	void createFile() 
-	{
-		J.createFile();
-	}
 	
-	//Checa si el folder esta vacio
-	boolean verifyFolder() 
-	{
-		return J.verifyFolder();
-	}
 	
+
 	
 	
 }

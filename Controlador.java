@@ -45,13 +45,7 @@ public class Controlador implements ActionListener {
 		Escuchadores();
 		
 		//Creacion del archivo de texto
-		if(M.verifyFolder()) 
-		{
-			M.createFile();
-		}else {	
-			
-			M.readRegistrosFile();;
-		}
+		//M.readRegistrosFile();
 		
 		
 	}
@@ -249,6 +243,7 @@ public class Controlador implements ActionListener {
 				}
 				
 			}else {
+				M.updateRegistroFile();
 				VR.dispose();
 				System.out.println("Se presiono cerrar");
 			}
