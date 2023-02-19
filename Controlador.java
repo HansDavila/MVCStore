@@ -304,7 +304,7 @@ public class Controlador implements ActionListener {
 				//Aqui se modifica el juguete 
 				Toy = new Juguete(Id, Nombre, Precio, Marca, Categoria, Stock);
 				M.modifyToy(posicion, Toy);
-				M.updateRegistroFile();
+
 				JOptionPane.showMessageDialog(IV, "Juguete Modificado");
 				
 				turnedBlack(VR.btnGuardar);
@@ -335,7 +335,7 @@ public class Controlador implements ActionListener {
 			{
 				
 				M.deleteToy(M.getIndexByID(id));
-				M.updateRegistroFile();
+				
 				JOptionPane.showMessageDialog(IV, "Juguete Borrado");
 										
 				turnedBlack(VR.btnGuardar);

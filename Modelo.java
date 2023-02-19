@@ -18,12 +18,7 @@ public class Modelo
 	private TextEngine TE = new TextEngine(folderRoute, route, fileName);
 	
 	
-	public void createToys() 
-	{
-		Registros.add(new Juguete(1, "Pelota", 100, "MexiToys", "Basico", 100));
-		Registros.add(new Juguete(2, "Transformer", 600, "Hasbro", "Accion", 20));
-		Registros.add(new Juguete(3, "Barbie", 600, "Matel", "Muñeca", 40));
-	}
+	
 	
 	
 	Juguete getJuguete(int index) 
@@ -71,22 +66,6 @@ public class Modelo
 		}
 	}
 	
-	void modifyToy(int index, Juguete modifiedToy) 
-	{
-		Registros.set(index, modifiedToy);
-	}
-	
-	void deleteToy(int index) 
-	{
-		Registros.remove(index);
-	}
-	
-	void addToy(Juguete toy) 
-	{
-		Registros.add(toy);
-		TE.writeData(toy);
-	}
-
 	void recorrerRegistro() 
 	{
 		for(Juguete toy: Registros) 
@@ -96,6 +75,25 @@ public class Modelo
 		}
 		System.out.println("\n");
 	}
+	
+	void modifyToy(int index, Juguete modifiedToy) 
+	{
+		Registros.set(index, modifiedToy);
+		updateRegistroFile();
+	}
+	
+	void deleteToy(int index) 
+	{
+		Registros.remove(index);
+		updateRegistroFile();
+	}
+	
+	void addToy(Juguete toy) 
+	{
+		Registros.add(toy);
+		TE.writeData(toy);
+	}
+	
 	
 	void updateRegistroFile() 
 	{
@@ -145,9 +143,7 @@ public class Modelo
 			// TODO: handle exception
 			System.out.println("File Vacio");
 		}
-		
-		
-		
+
 		
 	}
 	
@@ -156,7 +152,7 @@ public class Modelo
 		TE.createFile();
 	}
 	
-	
+	//Checa si el folder esta vacio
 	boolean verifyFolder() 
 	{
 		return TE.verifyFolder();
