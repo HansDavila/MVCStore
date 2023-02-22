@@ -1,5 +1,6 @@
 package mx.com.cursodia.jse18.mod2.semana1.tarea;
 
+import java.awt.Color;
 import java.awt.EventQueue;
 import java.awt.Font;
 
@@ -18,6 +19,7 @@ public class Vista extends JFrame
 	JButton btnRegistros;
 	JButton btnEliminar;
 	Thread ThreadV;
+	JButton btnCerrarV;
 	
 
 	void lanzarGUI()//Lanzar GUI en un hilo
@@ -46,7 +48,7 @@ public class Vista extends JFrame
 	
 	public void crearGUI() 
 	{
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 		setBounds(100, 100, 795, 552);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -73,6 +75,13 @@ public class Vista extends JFrame
 		btnRegistros.setFont(new Font("Tahoma", Font.BOLD, 22));
 		btnRegistros.setBounds(245, 180, 269, 57);
 		contentPane.add(btnRegistros);
+		
+		btnCerrarV = new JButton("CERRAR");
+		btnCerrarV.setForeground(Color.BLACK);
+		btnCerrarV.setBackground(new Color(192, 192, 192));
+		btnCerrarV.setFont(new Font("Tahoma", Font.BOLD, 20));
+		btnCerrarV.setBounds(312, 355, 128, 61);
+		contentPane.add(btnCerrarV);
 	}
 	
 	

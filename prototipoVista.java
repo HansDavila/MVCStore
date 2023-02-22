@@ -1,5 +1,6 @@
 package mx.com.cursodia.jse18.mod2.semana1.tarea;
 
+import java.awt.Color;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
@@ -15,6 +16,7 @@ public class prototipoVista extends JFrame {
 	private JPanel contentPane;
 	private JButton nuevoBtn_1;
 	private JButton verBtn_1;
+	private JButton btnCerrarV;
 
 	/**
 	 * Launch the application.
@@ -63,6 +65,13 @@ public class prototipoVista extends JFrame {
 		verBtn_1.setFont(new Font("Tahoma", Font.BOLD, 22));
 		verBtn_1.setBounds(245, 180, 269, 57);
 		contentPane.add(verBtn_1);
+		
+		btnCerrarV = new JButton("CERRAR");
+		btnCerrarV.setForeground(Color.BLACK);
+		btnCerrarV.setBackground(new Color(192, 192, 192));
+		btnCerrarV.setFont(new Font("Tahoma", Font.BOLD, 20));
+		btnCerrarV.setBounds(312, 355, 128, 61);
+		contentPane.add(btnCerrarV);
 	}
 }
 

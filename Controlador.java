@@ -8,6 +8,8 @@ import java.util.ArrayList;
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
 
+import jugueteria.Juguete;
+
 
 
 public class Controlador implements ActionListener {
@@ -45,13 +47,7 @@ public class Controlador implements ActionListener {
 		Escuchadores();
 		
 		//Creacion del archivo de texto
-		if(M.verifyFolder()) 
-		{
-			M.createFile();
-		}else {	
-			
-			M.readRegistrosFile();;
-		}
+		//M.readRegistrosFile();
 		
 		
 	}
@@ -75,9 +71,11 @@ public class Controlador implements ActionListener {
 		VR.setDefaultCloseOperation(VR.DO_NOTHING_ON_CLOSE);
 		
 		
+		
 		V.btnNuevo.addActionListener(this);
 		V.btnRegistros.addActionListener(this);
 		V.btnEliminar.addActionListener(this);
+		V.btnCerrarV.addActionListener(this);
 		
 		IV.btnCrear.addActionListener(this);
 		IV.btnCerrarIV.addActionListener(this);
@@ -176,6 +174,14 @@ public class Controlador implements ActionListener {
 			
 		}
 		
+		if(e.getSource() == V.btnCerrarV) 
+		{
+			M.updateRegistroFile();
+			System.out.println("Se presiono cerrar");
+			V.dispose();
+			
+		}
+		
 		if(e.getSource() == VR.btnAnterior) 
 		{
 			
@@ -249,6 +255,7 @@ public class Controlador implements ActionListener {
 				}
 				
 			}else {
+				M.updateRegistroFile();
 				VR.dispose();
 				System.out.println("Se presiono cerrar");
 			}
