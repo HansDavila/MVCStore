@@ -1,10 +1,7 @@
 package mx.com.cursodia.jse18.mod2.semana1.tarea;
 
-import java.util.ArrayList;
-
 import jugueteria.Juguete;
 import jugueteria.Jugueteria;
-
 
 public class Modelo 
 {
@@ -16,6 +13,7 @@ public class Modelo
 	public Modelo() 
 	{
 		//METODO Que recibe strings con los objetos del archivo de texto y los convierte en objetos juguetes
+		J.imprimirURL();
 		J.readRegistrosFile();
 	}
 	
@@ -74,11 +72,6 @@ public class Modelo
 	{
 		J.updateRegistroFile();
 	}
-	
-	
-
-	
-	
 	
 
 	
