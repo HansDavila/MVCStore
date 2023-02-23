@@ -17,7 +17,9 @@ public class Modelo
 	{
 		//METODO Que recibe strings con los objetos del archivo de texto y los convierte en objetos juguetes
 		//J.imprimirURL();
+		System.out.println("\nConectando...");
 		J.readRegistrosFile();
+		System.out.println("\nElementos leidos!");
 		
 	}
 	
@@ -26,52 +28,71 @@ public class Modelo
 		return J.getJuguete(index);
 	}
 	
+	
+	//Se devuelve el ultimo elemento de los registros	
 	Juguete getLastToy() 
 	{
-		//Se devuelve el ultimo elemento de los registros	
+		
 		return J.getLastToy();
 	}
 	
+
+	//Obtener el tamaño de Registros
 	int getRegistrosSize() 
 	{
 		return J.getRegistrosSize();
 	}
 	
+	
+	//Obtener el index del juguete obtenido
 	int getIndexOf(Juguete jug) 
 	{
 		return J.getIndexOf(jug);
 	}
 	
+	
+	//Obtener el index mediante el id
 	int getIndexByID(int id) 
 	{
 		return J.getIndexByID(id);
 	}
 	
+	
+	//Verificar si el ArrayList Registros dentro de la libreria esta vacio
 	boolean isRegistrosEmpty() 
 	{
 		return J.isRegistrosEmpty();
 	}
 	
-	void recorrerRegistro() 
-	{
-		J.readToys();
-	}
-	
-	void modifyToy(int index, Juguete modifiedToy) 
-	{
-		J.modifyToy(index, modifiedToy);
-	}
-	
-	void deleteToy(int index) 
-	{
-		J.deleteToy(index);
-	}
-	
+	//Agregar juguetes del Arraylist Registros
 	void addToy(Juguete toy) 
 	{
 		J.addToy(toy);
 	}
 	
+	
+	//Muestra impresion de los juguetes en consola
+	void recorrerRegistro() 
+	{	
+		J.readToys();	
+	}
+	
+	
+	//Modificar juguetes del Arraylist Registros
+	void modifyToy(int index, Juguete modifiedToy) 
+	{
+		J.modifyToy(index, modifiedToy);
+	}
+	
+	
+	//Eliminar juguetes del Arraylist Registros 
+	void deleteToy(int index) 
+	{
+		J.deleteToy(index);
+	}
+	
+	
+	//Modifica el archivo de txt con los registros actuales
 	public void updateRegistroFile() 
 	{
 		J.updateRegistroFile();

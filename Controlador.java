@@ -14,16 +14,20 @@ import jugueteria.Juguete;
 
 public class Controlador implements ActionListener {
 
+	//---------------------------CAMPOS DE CONTROLADOR---------------------------
 	
-	//QUITAR ESTE ARRAY Y MANEJARLO EN MODELO
-	//ArrayList<Juguete> Registros = new ArrayList<Juguete>();
+	//Vistas
 	Vista V;
 	InsertarVista IV;
 	VistaRegistro VR;
+	
+	//Modelo
 	Modelo M;
+	
+	//Elemento juguete 
 	Juguete Toy;
 	
-	
+	//Variables para manejar la navegación de registros
 	int indexInicio = 0;
 	int indexFin;
 	int indexActual;
@@ -31,6 +35,7 @@ public class Controlador implements ActionListener {
 	boolean band = false;
 	
 	
+	//---------------------------CONSTRUCTOR---------------------------
 	public Controlador(Vista V, InsertarVista IV, VistaRegistro VR, Modelo M)
 	{
 		this.V = V;
@@ -42,16 +47,16 @@ public class Controlador implements ActionListener {
 		this.IV.lanzarGUI();
 		this.VR.lanzarGUI();
 		
-		//M.createToys();
 		
 		Escuchadores();
-		
-		//Creacion del archivo de texto
-		//M.readRegistrosFile();
-		
+
 		
 	}
 	
+	
+	//---------------------------METODOS---------------------------
+	
+	//Metodo que agrega escuchadores a elementos de la vista
 	private void Escuchadores() 
 	{
 	
@@ -66,12 +71,12 @@ public class Controlador implements ActionListener {
 			}
 		}
 		
-		
+		//Establecer que no se pueda cerrar la ventana a travez de los botones de la ventana
 		IV.setDefaultCloseOperation(IV.DO_NOTHING_ON_CLOSE);
 		VR.setDefaultCloseOperation(VR.DO_NOTHING_ON_CLOSE);
 		
 		
-		
+		//Agregando listeners a elementos de la vista
 		V.btnNuevo.addActionListener(this);
 		V.btnRegistros.addActionListener(this);
 		V.btnEliminar.addActionListener(this);
@@ -91,25 +96,23 @@ public class Controlador implements ActionListener {
 		VR.btnEliminar.addActionListener(this);
 		
 		
-		/*
-		V1.btnLimpiar.addActionListener(this);
-		V1.btnSalir.addActionListener(this);
-		V1.btnVistaSumar.addActionListener(this);	
-		*/	
 	}
 
+	
+	//Metodo que manejara cuando se presione algun boton
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		// TODO Auto-generated method stub
 		
+		//Si se preciona el boton para acceder a la vista Insertar...
 		if(e.getSource() == V.btnNuevo) 
-		{
-			//JOptionPane.showMessageDialog(V, "presionaste el boton de Nuevo Juguete");
+		{			
 			IV.vaciarCamposVI();
 			IV.setVisible(true);
 
 		} 
 		
+		
+		//Si se preciona el boton para acceder a la vista registros...
 		if(e.getSource() == V.btnRegistros)
 		{
 			//Si los registros estan vacios...
@@ -123,16 +126,18 @@ public class Controlador implements ActionListener {
 								
 				indexFin = M.getRegistrosSize() - 1;
 										
-				Toy = M.getJuguete(0);
-				
+				//Se obtiene el primer juguete y se muestra en la vista
+				Toy = M.getJuguete(0);				
 				fillFieldsVR(M.getJuguete(pos));
 			}
 			
 		}
 
+		
+		//Si se preciona el boton para acceder a la vista Eliminar... (Boton no funcional y oculto a la vista)
 		if(e.getSource() == V.btnEliminar) 
 		{
-			//JOptionPane.showMessageDialog(V, "presionaste el boton de eliminar juguete");
+			
 			int opc  = JOptionPane.showConfirmDialog(V, "Desea eliminar el juguete", "Eliminación de juguete", JOptionPane.YES_OPTION);
 			
 			if(opc == 0) 
@@ -145,6 +150,8 @@ public class Controlador implements ActionListener {
 			
 		}
 		
+		
+		//Si se presiona el boton crear Juguete dentro de la vista INSERTAR...
 		if(e.getSource() == IV.btnCrear) 
 		{
 			//Se verifica que no se tengan campos vacios
@@ -156,35 +163,47 @@ public class Controlador implements ActionListener {
 				String Marca = IV.txtMarca.getText();
 				String Categoria = IV.txtCategoria.getText();
 				int Stock = Integer.parseInt(IV.txtStock.getText());
+				
+				//Se crea un juguete y se agrega en los registros
 				Toy = new Juguete(Id, Nombre, Precio, Marca, Categoria, Stock);				
 				M.addToy(Toy);
-				
-				
+							
 				JOptionPane.showMessageDialog(IV, "Juguete Agregado");
+				
 				indexFin = M.getRegistrosSize() - 1;
 				
+				//Se cierra la Vista INSERTAR
 				IV.dispose();				
 			}
 			
 		}
 		
+		
+		//Si se presiona el boton Cerrar dentro de la vista INSERTAR...
 		if(e.getSource() == IV.btnCerrarIV) 
 		{
-			IV.dispose();
-			
+			//Se cierra la Vista INSERTAR
+			IV.dispose();			
 		}
 		
+		
+		//Si se presiona el boton Cerrar dentro de la vista PRINCIPAL...
 		if(e.getSource() == V.btnCerrarV) 
 		{
+			//Se actualizan los registros en el txt
 			M.updateRegistroFile();
+			
 			System.out.println("Se presiono cerrar");
+			
+			//Se cierra el programa
 			V.dispose();
 			
 		}
 		
+		
+		//Si se presiona el boton Anterior dentro de la vista Registros...
 		if(e.getSource() == VR.btnAnterior) 
-		{
-			
+		{			
 			indexActual = M.getIndexOf(Toy);
 			
 			if(M.getRegistrosSize() > 0 && indexActual -1 > -1)
@@ -198,10 +217,10 @@ public class Controlador implements ActionListener {
 				fillFieldsVR(Toy);
 				
 			}
-			
 		}
 		
 		
+		//Si se presiona el boton Siguiente dentro de la vista Registros...
 		if(e.getSource() == VR.btnSiguiente) 
 		{
 			
@@ -216,15 +235,14 @@ public class Controlador implements ActionListener {
 			}
 			else 
 			{
-				System.out.println("false");
+				
 				Toy = M.getJuguete(0);
 				fillFieldsVR(Toy);
 				
-			}
-			
+			}			
 		}
 		
-		
+		//Si se presiona el boton "Primer Registro" dentro de la vista Registros...
 		if(e.getSource() == VR.btnPrimer) 
 		{
 			Toy = M.getJuguete(0);
@@ -232,73 +250,82 @@ public class Controlador implements ActionListener {
 		}
 		
 		
+		//Si se presiona el boton "Ultimo Registro" dentro de la vista Registros...
 		if(e.getSource() == VR.btnUltimo) 
 		{
 			Toy = M.getLastToy();
 			fillFieldsVR(Toy);
 		}
 		
+		
+		//Si se presiona el boton "Cerrar" dentro de la vista Registros...
 		if(e.getSource() == VR.btnCerrarVR) 
 		{
 			if(band) {
+				
 				int opc  = JOptionPane.showConfirmDialog(VR, "¿Esta seguro que desea salir sin guardar cambios?", "AVISO", JOptionPane.YES_OPTION, JOptionPane.WARNING_MESSAGE);
+				//En caso que se haya escogido si...
 				if (opc == 0) 
 				{
 					VR.setVisible(false);
 					VR.btnGuardar.setEnabled(false);
-					turnedBlack(VR.btnGuardar);
-					turnedOrange(VR.btnModificar);
+					turnBlack(VR.btnGuardar);
+					turnOrange(VR.btnModificar);
 					freeMoveButtonsVR();
 					blockFieldsVR();
 					band = false;
 					VR.dispose();
 				}
 				
-			}else {
+			}else { //En caso que haya escogido No...
+
+				//Se guardan los cambios en el txt
 				M.updateRegistroFile();
 				VR.dispose();
 				System.out.println("Se presiono cerrar");
 			}
-			
-			
 		}
 		
 		
+		//Si se presiona el boton "Modificar" dentro de la vista Registros...
 		if(e.getSource() == VR.btnModificar) 
 		{
+			//En caso que los campos esten bloqueados
 			if(!band) 
 			{
+				//Permitir modificar los campos pero bloquear el movimiento y habilitar el boton gaurdar			
 				VR.btnGuardar.setEnabled(true);
-				turnedGreen(VR.btnGuardar);
-				turnedBlack(VR.btnModificar);
-				blockMoveButtonsVR();
-								
+				turnGreen(VR.btnGuardar);
+				turnBlack(VR.btnModificar);
+				blockMoveButtonsVR();								
 				freeFieldsVR();
 				
 				band = true;
-				System.out.println("BAND -> " + band);
 				
-			}else if(band)
+				
+			}else if(band) //En caso que los campos esten habilitados
 			{
+				//Bloquear campos y permitir movimiento
 				VR.btnGuardar.setEnabled(false);
-				turnedBlack(VR.btnGuardar);
-				turnedOrange(VR.btnModificar);
+				turnBlack(VR.btnGuardar);
+				turnOrange(VR.btnModificar);
 				freeMoveButtonsVR();
 				blockFieldsVR();
+				
 				band = false;
-				System.out.println("BAND -> " + band);
+				
 			}
 			
 		}
 		
 		
+		//Si se presiona el boton "Guardar" dentro de la vista Registros...
 		if(e.getSource() == VR.btnGuardar) 
 		{
-			int id = Integer.parseInt(VR.txtId.getText());
-			
+			int id = Integer.parseInt(VR.txtId.getText());			
 			int posicion = M.getIndexByID(id);
 			
-			
+			//Verificar ID
 			if(posicion != -1) 
 			{					
 				int Id = Integer.parseInt(VR.txtId.getText());
@@ -314,13 +341,13 @@ public class Controlador implements ActionListener {
 
 				JOptionPane.showMessageDialog(IV, "Juguete Modificado");
 				
-				turnedBlack(VR.btnGuardar);
+				turnBlack(VR.btnGuardar);
 				VR.btnGuardar.setEnabled(false);
 				
 				freeMoveButtonsVR();
 				blockFieldsVR();
 				
-				turnedOrange(VR.btnModificar);
+				turnOrange(VR.btnModificar);
 				
 			}else {
 				JOptionPane.showMessageDialog(IV, "ERROR CON EL ID DEL JUGUETE");
@@ -330,7 +357,8 @@ public class Controlador implements ActionListener {
 			band = false;
 		}
 		
-		
+				
+		//Si se presiona el boton "ELIMINAR" dentro de la vista Registros...
 		if(e.getSource() == VR.btnEliminar) 
 		{
 			int id = Integer.parseInt(VR.txtId.getText());
@@ -340,33 +368,36 @@ public class Controlador implements ActionListener {
 			//Si la opcion fue si...
 			if(opc == 0) 
 			{
-				
-				M.deleteToy(M.getIndexByID(id));
-				
+				//Bloquear el boton guardar, bloquear campos y permitir el movimiento
+				//Eliminar juguete
+				M.deleteToy(M.getIndexByID(id));				
 				JOptionPane.showMessageDialog(IV, "Juguete Borrado");
 										
-				turnedBlack(VR.btnGuardar);
+				turnBlack(VR.btnGuardar);
 				VR.btnGuardar.setEnabled(false);
 				
 				freeMoveButtonsVR();
 				blockFieldsVR();
 				
-				turnedOrange(VR.btnModificar);
+				turnOrange(VR.btnModificar);
 				
-				if(!M.isRegistrosEmpty()) {
+				//Si todavia quedan mas juguetes en los registros...
+				if(!M.isRegistrosEmpty()) 
+				{
 					Toy = M.getJuguete(0);
 					fillFieldsVR(M.getJuguete(0));
 					indexActual = 0;
 					indexFin = M.getRegistrosSize() - 1;
-				}else {
+					
+				}else { //Si ya no quedan mas juguetes y los registros estan vacios
+					//Regresar a la vista principal
 					JOptionPane.showMessageDialog(IV, "Registros vacios!!\nRegresando a la vista principal");
 					VR.setVisible(false);
 				}
 				
 			} //Si la opcion fue no...
 			else if(opc == 1) {
-				//NO HACER NADA
-				
+				//NO HACER NADA				
 			}
 			
 		}
@@ -374,7 +405,8 @@ public class Controlador implements ActionListener {
 	}
 	
 	
-	
+		
+	//METODO PARA VERIFICAR QUE LOS CAMPOS NO ESTEN VACIOS EN LA LISTA INSERTAR
 	public boolean VerificarIV() 
 	{
 		boolean bandera = true;
@@ -421,24 +453,51 @@ public class Controlador implements ActionListener {
 	
 	
 	
+	//---------------------------METODOS DE VISTAS---------------------------
 	
-	public void turnedOrange(JButton boton) 
+	//Metodo que cambia el color del boton a naranja
+	public void turnOrange(JButton boton) 
 	{
 		boton.setForeground(new Color(255, 255, 255));
 		boton.setBackground(new Color(255, 128, 64));
 	}
 	
-	public void turnedGreen(JButton boton) 
+	
+	//Metodo que cambia el color del boton a verde
+	public void turnGreen(JButton boton) 
 	{
 		boton.setForeground(new Color(0, 0, 0));
 		boton.setBackground(new Color(0, 255, 0));
 	}
-	public void turnedBlack(JButton boton) 
+	
+	
+	//Metodo que cambia el color del boton a negro
+	public void turnBlack(JButton boton) 
 	{
 		boton.setForeground(new Color(255, 255, 255));
 		boton.setBackground(new Color(192, 192, 192));
 	}
 	
+	//Metodo que bloquea los botones de navegación de la vista INSERTAR
+	public void blockMoveButtonsVR() 
+	{
+		VR.btnAnterior.setEnabled(false);
+		VR.btnSiguiente.setEnabled(false);
+		VR.btnPrimer.setEnabled(false);
+		VR.btnUltimo.setEnabled(false);
+	}
+		
+		
+	//Metodo que libera los botones de navegación de la vista INSERTAR
+	public void freeMoveButtonsVR() 
+	{
+		VR.btnAnterior.setEnabled(true);
+		VR.btnSiguiente.setEnabled(true);
+		VR.btnPrimer.setEnabled(true);
+		VR.btnUltimo.setEnabled(true);
+	}	
+	
+	//Metodo que libera los campos de la vista REGISTROS
 	public void freeFieldsVR() 
 	{
 		
@@ -449,22 +508,8 @@ public class Controlador implements ActionListener {
 		VR.txtStock.setEditable(true);
 	}
 	
-	public void blockMoveButtonsVR() 
-	{
-		VR.btnAnterior.setEnabled(false);
-		VR.btnSiguiente.setEnabled(false);
-		VR.btnPrimer.setEnabled(false);
-		VR.btnUltimo.setEnabled(false);
-	}
 	
-	public void freeMoveButtonsVR() 
-	{
-		VR.btnAnterior.setEnabled(true);
-		VR.btnSiguiente.setEnabled(true);
-		VR.btnPrimer.setEnabled(true);
-		VR.btnUltimo.setEnabled(true);
-	}
-	
+	//Metodo que bloquea los Campos de la vista INSERTAR
 	public void blockFieldsVR() 
 	{
 		VR.txtId.setEditable(false);;
@@ -475,6 +520,8 @@ public class Controlador implements ActionListener {
 		VR.txtStock.setEditable(false);
 	}
 	
+
+	//Metodo que habilita los campos de la vista INSERTAR
 	public void fillFieldsVR(Juguete Toy) 
 	{
 		VR.txtId.setText(""+ Toy.getId_jug());
@@ -485,6 +532,7 @@ public class Controlador implements ActionListener {
 		VR.txtStock.setText(""+ Toy.getStock());
 	}
 	
+	//Metodo que vacía campos de la vista INSERTAR
 	public void vaciarCamposVR() 
 	{
 		VR.txtId.setText("");
@@ -495,10 +543,4 @@ public class Controlador implements ActionListener {
 		VR.txtStock.setText("");
 	}
 	
-	
-	
-	
-	
-	
-
 }
