@@ -21,9 +21,12 @@ public class InsertarVista extends JFrame
 	JTextField txtPrecio;
 	JTextField txtMarca;
 	JTextField txtCategoria;
+	JTextField txtProveedor;
 	JTextField txtStock;
+	
 	JButton btnCrear;
 	JButton btnCerrarIV;
+	
 	Thread ThreadIV;
 	
 	void lanzarGUI()//Lanzar GUI en un hilo
@@ -113,39 +116,43 @@ public class InsertarVista extends JFrame
 		txtCategoria.setColumns(10);
 		txtCategoria.setBounds(345, 148, 163, 20);
 		contentPane.add(txtCategoria);
+		
+		JLabel prov_label = new JLabel("Proveedor :");
+		prov_label.setFont(new Font("Arial", Font.BOLD, 18));
+		prov_label.setBounds(201, 178, 137, 20);
+		contentPane.add(prov_label);
+		
+		txtProveedor = new JTextField();
+		txtProveedor.setFont(new Font("Dialog", Font.PLAIN, 17));
+		txtProveedor.setColumns(10);
+		txtProveedor.setBounds(345, 178, 163, 20);
+		contentPane.add(txtProveedor);
 
 		JLabel stock_label = new JLabel("Stock :");
 		stock_label.setFont(new Font("Arial", Font.BOLD, 18));
-		stock_label.setBounds(201, 182, 137, 20);
+		stock_label.setBounds(201, 209, 137, 20);
 		contentPane.add(stock_label);
 
 		txtStock = new JTextField();
 		txtStock.setFont(new Font("Dialog", Font.PLAIN, 17));
 		txtStock.setColumns(10);
-		txtStock.setBounds(345, 182, 163, 20);
+		txtStock.setBounds(345, 209, 163, 20);
 		contentPane.add(txtStock);
 		
 		btnCrear = new JButton("CREAR JUGUETE");
 		btnCrear.setFont(new Font("Tahoma", Font.BOLD, 21));
-		btnCrear.setBounds(237, 250, 225, 73);
+		btnCrear.setBounds(237, 273, 225, 73);
 		contentPane.add(btnCrear);
 		
 		btnCerrarIV = new JButton("CERRAR");
 		btnCerrarIV.setForeground(Color.BLACK);
 		btnCerrarIV.setBackground(new Color(192, 192, 192));
 		btnCerrarIV.setFont(new Font("Tahoma", Font.BOLD, 20));
-		btnCerrarIV.setBounds(286, 355, 128, 61);
+		btnCerrarIV.setBounds(286, 378, 128, 61);
 		contentPane.add(btnCerrarIV);
+		
 	}
 	
-	public void vaciarCamposVI() 
-	{
-		txtId.setText("");
-		txtNombre.setText("");
-		txtPrecio.setText("");
-		txtMarca.setText("");
-		txtCategoria.setText("");
-		txtStock.setText("");
-	}
+	
 	
 }

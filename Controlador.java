@@ -106,7 +106,7 @@ public class Controlador implements ActionListener {
 		//Si se preciona el boton para acceder a la vista Insertar...
 		if(e.getSource() == V.btnNuevo) 
 		{			
-			IV.vaciarCamposVI();
+			vaciarCamposVI();
 			IV.setVisible(true);
 
 		} 
@@ -537,7 +537,7 @@ public class Controlador implements ActionListener {
 		VR.txtStock.setText(""+ Toy.getStock_jug());
 	}
 	
-	//Metodo que vacía campos de la vista INSERTAR
+	//Metodo que vacía campos de la vista REGISTROS
 	public void vaciarCamposVR() 
 	{
 		VR.txtId.setText("");
@@ -546,6 +546,17 @@ public class Controlador implements ActionListener {
 		VR.txtMarca.setText("");
 		VR.txtCategoria.setText("");
 		VR.txtStock.setText("");
+	}
+	
+	//Metodo que vacía campos de la vista INSERTAR
+	public void vaciarCamposVI() 
+	{
+		IV.txtId.setText("");
+		IV.txtNombre.setText("");
+		IV.txtPrecio.setText("");
+		IV.txtMarca.setText("");
+		IV.txtCategoria.setText("");
+		IV.txtStock.setText("");
 	}
 	
 }
