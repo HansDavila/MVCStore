@@ -161,11 +161,12 @@ public class Controlador implements ActionListener {
 				String Nombre = IV.txtNombre.getText();
 				float Precio = Float.parseFloat(IV.txtPrecio.getText());
 				String Marca = IV.txtMarca.getText();
-				String Categoria = IV.txtCategoria.getText();
+				int Categoria = Integer.parseInt(IV.txtCategoria.getText());
+				int Proveedor = Integer.parseInt(IV.txtProveedor.getText());
 				int Stock = Integer.parseInt(IV.txtStock.getText());
 				
 				//Se crea un juguete y se agrega en los registros
-				Toy = new Juguete(Id, Nombre, Precio, Marca, Stock, Stock, Stock);				
+				Toy = new Juguete(Id, Nombre, Precio, Marca, Categoria, Proveedor, Stock);				
 				M.addToy(Toy);
 							
 				JOptionPane.showMessageDialog(IV, "Juguete Agregado");
