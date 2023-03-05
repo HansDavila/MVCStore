@@ -165,7 +165,7 @@ public class Controlador implements ActionListener {
 				int Stock = Integer.parseInt(IV.txtStock.getText());
 				
 				//Se crea un juguete y se agrega en los registros
-				Toy = new Juguete(Id, Nombre, Precio, Marca, Categoria, Stock);				
+				Toy = new Juguete(Id, Nombre, Precio, Marca, Stock, Stock, Stock);				
 				M.addToy(Toy);
 							
 				JOptionPane.showMessageDialog(IV, "Juguete Agregado");
@@ -336,7 +336,8 @@ public class Controlador implements ActionListener {
 				int Stock = Integer.parseInt(VR.txtStock.getText());
 							
 				//Aqui se modifica el juguete 
-				Toy = new Juguete(Id, Nombre, Precio, Marca, Categoria, Stock);
+				Toy = new Juguete(Id, Nombre, Precio, Marca, Stock, Stock, Stock);
+				
 				M.modifyToy(posicion, Toy);
 
 				JOptionPane.showMessageDialog(IV, "Juguete Modificado");
@@ -529,7 +530,7 @@ public class Controlador implements ActionListener {
 		VR.txtPrecio.setText(""+ Toy.getPre_jug());
 		VR.txtMarca.setText(""+ Toy.getMarc_jug());
 		VR.txtCategoria.setText(""+ Toy.getCatg_jug());
-		VR.txtStock.setText(""+ Toy.getStock());
+		VR.txtStock.setText(""+ Toy.getStock_jug());
 	}
 	
 	//Metodo que vacía campos de la vista INSERTAR

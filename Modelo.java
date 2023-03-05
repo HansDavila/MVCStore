@@ -11,7 +11,6 @@ public class Modelo
 	//Objeto de libreria que se encarga del manejo de la base de datos
 	FiltroEngineRoute J = new Jugueteria();
 	
-
 	
 	public Modelo() 
 	{
@@ -97,4 +96,6 @@ public class Modelo
 	{
 		J.updateRegistroFile();
 	}
+	
+}
 	
