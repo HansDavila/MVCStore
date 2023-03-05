@@ -123,7 +123,7 @@ public class Controlador implements ActionListener {
 			}else {
 				//Se abre ventana VR y se muestra el primer registro
 				VR.setVisible(true);
-								
+											
 				indexFin = M.getRegistrosSize() - 1;
 										
 				//Se obtiene el primer juguete y se muestra en la vista
@@ -332,11 +332,12 @@ public class Controlador implements ActionListener {
 				String Nombre = VR.txtNombre.getText();
 				float Precio = Float.parseFloat(VR.txtPrecio.getText());
 				String Marca = VR.txtMarca.getText();
-				String Categoria = VR.txtCategoria.getText();
+				int Categoria = Integer.parseInt(VR.txtCategoria.getText());
+				int Proveedor = Integer.parseInt(VR.txtProveedor.getText());
 				int Stock = Integer.parseInt(VR.txtStock.getText());
 							
 				//Aqui se modifica el juguete 
-				Toy = new Juguete(Id, Nombre, Precio, Marca, Stock, Stock, Stock);
+				Toy = new Juguete(Id, Nombre, Precio, Marca, Categoria, Proveedor, Stock);
 				
 				M.modifyToy(posicion, Toy);
 
@@ -506,6 +507,7 @@ public class Controlador implements ActionListener {
 		VR.txtPrecio.setEditable(true);;
 		VR.txtMarca.setEditable(true);
 		VR.txtCategoria.setEditable(true);
+		VR.txtProveedor.setEditable(true);
 		VR.txtStock.setEditable(true);
 	}
 	
@@ -518,6 +520,7 @@ public class Controlador implements ActionListener {
 		VR.txtPrecio.setEditable(false);;
 		VR.txtMarca.setEditable(false);
 		VR.txtCategoria.setEditable(false);
+		VR.txtProveedor.setEditable(false);
 		VR.txtStock.setEditable(false);
 	}
 	
@@ -530,6 +533,7 @@ public class Controlador implements ActionListener {
 		VR.txtPrecio.setText(""+ Toy.getPre_jug());
 		VR.txtMarca.setText(""+ Toy.getMarc_jug());
 		VR.txtCategoria.setText(""+ Toy.getCatg_jug());
+		VR.txtProveedor.setText(""+ Toy.getProv_jug());
 		VR.txtStock.setText(""+ Toy.getStock_jug());
 	}
 	

@@ -20,6 +20,7 @@ public class Modelo
 		J.readRegistrosFile();
 		System.out.println("\nElementos leidos!");
 		
+		
 	}
 	
 	Juguete getJuguete(int index) 
