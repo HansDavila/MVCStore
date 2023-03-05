@@ -106,7 +106,7 @@ public class Controlador implements ActionListener {
 		//Si se preciona el boton para acceder a la vista Insertar...
 		if(e.getSource() == V.btnNuevo) 
 		{			
-			IV.vaciarCamposVI();
+			vaciarCamposVI();
 			IV.setVisible(true);
 
 		} 
@@ -123,7 +123,7 @@ public class Controlador implements ActionListener {
 			}else {
 				//Se abre ventana VR y se muestra el primer registro
 				VR.setVisible(true);
-								
+											
 				indexFin = M.getRegistrosSize() - 1;
 										
 				//Se obtiene el primer juguete y se muestra en la vista
@@ -161,11 +161,12 @@ public class Controlador implements ActionListener {
 				String Nombre = IV.txtNombre.getText();
 				float Precio = Float.parseFloat(IV.txtPrecio.getText());
 				String Marca = IV.txtMarca.getText();
-				String Categoria = IV.txtCategoria.getText();
+				int Categoria = Integer.parseInt(IV.txtCategoria.getText());
+				int Proveedor = Integer.parseInt(IV.txtProveedor.getText());
 				int Stock = Integer.parseInt(IV.txtStock.getText());
 				
 				//Se crea un juguete y se agrega en los registros
-				Toy = new Juguete(Id, Nombre, Precio, Marca, Categoria, Stock);				
+				Toy = new Juguete(Id, Nombre, Precio, Marca, Categoria, Proveedor, Stock);				
 				M.addToy(Toy);
 							
 				JOptionPane.showMessageDialog(IV, "Juguete Agregado");
@@ -332,11 +333,13 @@ public class Controlador implements ActionListener {
 				String Nombre = VR.txtNombre.getText();
 				float Precio = Float.parseFloat(VR.txtPrecio.getText());
 				String Marca = VR.txtMarca.getText();
-				String Categoria = VR.txtCategoria.getText();
+				int Categoria = Integer.parseInt(VR.txtCategoria.getText());
+				int Proveedor = Integer.parseInt(VR.txtProveedor.getText());
 				int Stock = Integer.parseInt(VR.txtStock.getText());
 							
 				//Aqui se modifica el juguete 
-				Toy = new Juguete(Id, Nombre, Precio, Marca, Categoria, Stock);
+				Toy = new Juguete(Id, Nombre, Precio, Marca, Categoria, Proveedor, Stock);
+				
 				M.modifyToy(posicion, Toy);
 
 				JOptionPane.showMessageDialog(IV, "Juguete Modificado");
@@ -505,6 +508,7 @@ public class Controlador implements ActionListener {
 		VR.txtPrecio.setEditable(true);;
 		VR.txtMarca.setEditable(true);
 		VR.txtCategoria.setEditable(true);
+		VR.txtProveedor.setEditable(true);
 		VR.txtStock.setEditable(true);
 	}
 	
@@ -517,6 +521,7 @@ public class Controlador implements ActionListener {
 		VR.txtPrecio.setEditable(false);;
 		VR.txtMarca.setEditable(false);
 		VR.txtCategoria.setEditable(false);
+		VR.txtProveedor.setEditable(false);
 		VR.txtStock.setEditable(false);
 	}
 	
@@ -529,10 +534,11 @@ public class Controlador implements ActionListener {
 		VR.txtPrecio.setText(""+ Toy.getPre_jug());
 		VR.txtMarca.setText(""+ Toy.getMarc_jug());
 		VR.txtCategoria.setText(""+ Toy.getCatg_jug());
-		VR.txtStock.setText(""+ Toy.getStock());
+		VR.txtProveedor.setText(""+ Toy.getProv_jug());
+		VR.txtStock.setText(""+ Toy.getStock_jug());
 	}
 	
-	//Metodo que vacía campos de la vista INSERTAR
+	//Metodo que vacía campos de la vista REGISTROS
 	public void vaciarCamposVR() 
 	{
 		VR.txtId.setText("");
@@ -541,6 +547,17 @@ public class Controlador implements ActionListener {
 		VR.txtMarca.setText("");
 		VR.txtCategoria.setText("");
 		VR.txtStock.setText("");
+	}
+	
+	//Metodo que vacía campos de la vista INSERTAR
+	public void vaciarCamposVI() 
+	{
+		IV.txtId.setText("");
+		IV.txtNombre.setText("");
+		IV.txtPrecio.setText("");
+		IV.txtMarca.setText("");
+		IV.txtCategoria.setText("");
+		IV.txtStock.setText("");
 	}
 	
 }

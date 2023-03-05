@@ -23,6 +23,7 @@ public class VistaRegistro extends JFrame
 	JTextField txtMarca;
 	JTextField txtCategoria;
 	JTextField txtStock;
+	JTextField txtProveedor;
 	
 	JButton btnCrear;
 	JButton btnCerrarIV;
@@ -66,7 +67,7 @@ public class VistaRegistro extends JFrame
 	public void crearRegistroGUI() 
 	{
 		setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
-		setBounds(100, 100, 782, 563);
+		setBounds(100, 100, 812, 653);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 
@@ -135,16 +136,28 @@ public class VistaRegistro extends JFrame
 		txtCategoria.setBounds(375, 249, 174, 27);
 		txtCategoria.setEditable(false);
 		contentPane.add(txtCategoria);
+		
+		JLabel prov_label = new JLabel("Proveedor :");
+		prov_label.setFont(new Font("Arial", Font.BOLD, 24));
+		prov_label.setBounds(228, 290, 137, 30);
+		contentPane.add(prov_label);
+		
+		txtProveedor = new JTextField();
+		txtProveedor.setFont(new Font("Dialog", Font.ITALIC, 25));
+		txtProveedor.setEditable(false);
+		txtProveedor.setColumns(10);
+		txtProveedor.setBounds(375, 290, 174, 27);
+		contentPane.add(txtProveedor);
 
 		JLabel stock_label = new JLabel("Stock :");
 		stock_label.setFont(new Font("Arial", Font.BOLD, 25));
-		stock_label.setBounds(228, 302, 137, 20);
+		stock_label.setBounds(228, 335, 137, 20);
 		contentPane.add(stock_label);
 
 		txtStock = new JTextField();
 		txtStock.setFont(new Font("Dialog", Font.ITALIC, 25));
 		txtStock.setColumns(10);
-		txtStock.setBounds(375, 297, 174, 27);
+		txtStock.setBounds(375, 330, 174, 27);
 		txtStock.setEditable(false);
 		contentPane.add(txtStock);
 		
@@ -157,28 +170,28 @@ public class VistaRegistro extends JFrame
 		btnPrimer.setForeground(new Color(255, 255, 255));
 		btnPrimer.setBackground(new Color(102, 102, 255));
 		btnPrimer.setFont(new Font("Tahoma", Font.BOLD, 15));
-		btnPrimer.setBounds(24, 363, 168, 30);
+		btnPrimer.setBounds(27, 446, 168, 30);
 		contentPane.add(btnPrimer);
 		
 		btnUltimo = new JButton("Ultimo Registro");
 		btnUltimo.setForeground(new Color(255, 255, 255));
 		btnUltimo.setFont(new Font("Tahoma", Font.BOLD, 15));
 		btnUltimo.setBackground(new Color(102, 102, 255));
-		btnUltimo.setBounds(568, 363, 168, 30);
+		btnUltimo.setBounds(571, 446, 168, 30);
 		contentPane.add(btnUltimo);
 		
 		btnAnterior = new JButton("Anterior");
 		btnAnterior.setForeground(new Color(255, 255, 255));
 		btnAnterior.setFont(new Font("Tahoma", Font.BOLD, 15));
 		btnAnterior.setBackground(new Color(102, 102, 255));
-		btnAnterior.setBounds(249, 363, 116, 30);
+		btnAnterior.setBounds(252, 446, 116, 30);
 		contentPane.add(btnAnterior);
 		
 		btnSiguiente = new JButton("Siguiente");
 		btnSiguiente.setForeground(new Color(255, 255, 255));
 		btnSiguiente.setFont(new Font("Tahoma", Font.BOLD, 15));
 		btnSiguiente.setBackground(new Color(102, 102, 255));
-		btnSiguiente.setBounds(405, 363, 116, 30);
+		btnSiguiente.setBounds(408, 446, 116, 30);
 		contentPane.add(btnSiguiente);
 		
 		btnCerrarVR = new JButton("CERRAR");
@@ -192,14 +205,14 @@ public class VistaRegistro extends JFrame
 		btnModificar.setForeground(new Color(255, 255, 255));
 		btnModificar.setBackground(new Color(255, 128, 64));
 		btnModificar.setFont(new Font("Tahoma", Font.BOLD, 15));
-		btnModificar.setBounds(41, 434, 129, 46);
+		btnModificar.setBounds(44, 517, 129, 46);
 		contentPane.add(btnModificar);
 		
 		btnGuardar = new JButton("GUARDAR");
 		btnGuardar.setForeground(new Color(255, 255, 255));
 		btnGuardar.setFont(new Font("Tahoma", Font.BOLD, 15));
 		btnGuardar.setBackground(new Color(192, 192, 192));
-		btnGuardar.setBounds(279, 434, 214, 46);
+		btnGuardar.setBounds(282, 517, 214, 46);
 		btnGuardar.setEnabled(false);
 		contentPane.add(btnGuardar);
 		//btnGuardar.setForeground(new Color(0, 0, 0));
@@ -209,7 +222,7 @@ public class VistaRegistro extends JFrame
 		btnEliminar.setForeground(new Color(255, 255, 255));
 		btnEliminar.setFont(new Font("Tahoma", Font.BOLD, 15));
 		btnEliminar.setBackground(new Color(255, 0, 0));
-		btnEliminar.setBounds(595, 434, 129, 46);
+		btnEliminar.setBounds(598, 517, 129, 46);
 		contentPane.add(btnEliminar);
 
 	}

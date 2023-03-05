@@ -13,7 +13,21 @@ import java.awt.Color;
 
 public class InsertarPrototipo extends JFrame {
 
-	private JPanel contentPane;
+	//Campos de clase
+		JPanel contentPane;
+		JTextField txtId;
+		JTextField txtNombre;
+		JTextField txtPrecio;
+		JTextField txtMarca;
+		JTextField txtCategoria;
+		JTextField txtStock;		
+		JTextField txtProveedor;
+		
+		JButton btnCrear;
+		JButton btnCerrarIV;
+		
+		
+		
 
 	/**
 	 * Launch the application.
@@ -48,79 +62,91 @@ public class InsertarPrototipo extends JFrame {
 		id_label.setBounds(201, 21, 137, 20);
 		contentPane.add(id_label);
 
-		JTextField id_txt = new JTextField();
-		id_txt.setFont(new Font("Dialog", Font.PLAIN, 17));
-		id_txt.setBounds(345, 21, 163, 20);
-		contentPane.add(id_txt);
-		id_txt.setColumns(10);
+		txtId = new JTextField();
+		txtId.setFont(new Font("Dialog", Font.PLAIN, 17));
+		txtId.setBounds(345, 21, 163, 20);
+		contentPane.add(txtId);
+		txtId.setColumns(10);
 
 		JLabel nom_label = new JLabel("Nombre :");
 		nom_label.setFont(new Font("Arial", Font.BOLD, 18));
 		nom_label.setBounds(201, 55, 137, 20);
 		contentPane.add(nom_label);
 
-		JTextField nom_txt = new JTextField();
-		nom_txt.setFont(new Font("Dialog", Font.PLAIN, 17));
-		nom_txt.setColumns(10);
-		nom_txt.setBounds(345, 55, 163, 20);
-		contentPane.add(nom_txt);
+		txtNombre = new JTextField();
+		txtNombre.setFont(new Font("Dialog", Font.PLAIN, 17));
+		txtNombre.setColumns(10);
+		txtNombre.setBounds(345, 55, 163, 20);
+		contentPane.add(txtNombre);
 
 		JLabel pre_label = new JLabel("Precio :");
 		pre_label.setFont(new Font("Arial", Font.BOLD, 18));
 		pre_label.setBounds(201, 86, 137, 20);
 		contentPane.add(pre_label);
 
-		JTextField pre_txt = new JTextField();
-		pre_txt.setFont(new Font("Dialog", Font.PLAIN, 17));
-		pre_txt.setColumns(10);
-		pre_txt.setBounds(345, 86, 163, 20);
-		contentPane.add(pre_txt);
+		txtPrecio = new JTextField();
+		txtPrecio.setFont(new Font("Dialog", Font.PLAIN, 17));
+		txtPrecio.setColumns(10);
+		txtPrecio.setBounds(345, 86, 163, 20);
+		contentPane.add(txtPrecio);
 
 		JLabel marc_label = new JLabel("Marca :");
 		marc_label.setFont(new Font("Arial", Font.BOLD, 18));
 		marc_label.setBounds(201, 117, 137, 20);
 		contentPane.add(marc_label);
 
-		JTextField marc_txt = new JTextField();
-		marc_txt.setFont(new Font("Dialog", Font.PLAIN, 17));
-		marc_txt.setColumns(10);
-		marc_txt.setBounds(345, 117, 163, 20);
-		contentPane.add(marc_txt);
+		txtMarca = new JTextField();
+		txtMarca.setFont(new Font("Dialog", Font.PLAIN, 17));
+		txtMarca.setColumns(10);
+		txtMarca.setBounds(345, 117, 163, 20);
+		contentPane.add(txtMarca);
 
 		JLabel catg_label = new JLabel("Categoria :");
 		catg_label.setFont(new Font("Arial", Font.BOLD, 18));
 		catg_label.setBounds(201, 148, 137, 20);
 		contentPane.add(catg_label);
 
-		JTextField catg_txt = new JTextField();
-		catg_txt.setFont(new Font("Dialog", Font.PLAIN, 17));
-		catg_txt.setColumns(10);
-		catg_txt.setBounds(345, 148, 163, 20);
-		contentPane.add(catg_txt);
+		txtCategoria = new JTextField();
+		txtCategoria.setFont(new Font("Dialog", Font.PLAIN, 17));
+		txtCategoria.setColumns(10);
+		txtCategoria.setBounds(345, 148, 163, 20);
+		contentPane.add(txtCategoria);
+		
+		JLabel prov_label = new JLabel("Proveedor :");
+		prov_label.setFont(new Font("Arial", Font.BOLD, 18));
+		prov_label.setBounds(201, 178, 137, 20);
+		contentPane.add(prov_label);
+		
+		txtProveedor = new JTextField();
+		txtProveedor.setFont(new Font("Dialog", Font.PLAIN, 17));
+		txtProveedor.setColumns(10);
+		txtProveedor.setBounds(345, 178, 163, 20);
+		contentPane.add(txtProveedor);
+		
 
 		JLabel stock_label = new JLabel("Stock :");
 		stock_label.setFont(new Font("Arial", Font.BOLD, 18));
-		stock_label.setBounds(201, 182, 137, 20);
+		stock_label.setBounds(201, 209, 137, 20);
 		contentPane.add(stock_label);
 
-		JTextField stock_txt = new JTextField();
-		stock_txt.setFont(new Font("Dialog", Font.PLAIN, 17));
-		stock_txt.setColumns(10);
-		stock_txt.setBounds(345, 182, 163, 20);
-		contentPane.add(stock_txt);
+		txtStock = new JTextField();
+		txtStock.setFont(new Font("Dialog", Font.PLAIN, 17));
+		txtStock.setColumns(10);
+		txtStock.setBounds(345, 209, 163, 20);
+		contentPane.add(txtStock);
 		
-		JButton crearBtn = new JButton("CREAR JUGUETE");
-		crearBtn.setBackground(Color.BLUE);
-		crearBtn.setFont(new Font("Tahoma", Font.BOLD, 21));
-		crearBtn.setBounds(237, 250, 225, 73);
-		contentPane.add(crearBtn);
+		btnCrear = new JButton("CREAR JUGUETE");
+		btnCrear.setFont(new Font("Tahoma", Font.BOLD, 21));
+		btnCrear.setBounds(237, 273, 225, 73);
+		contentPane.add(btnCrear);
 		
-		JButton btnCerrarIV = new JButton("CERRAR");
+		btnCerrarIV = new JButton("CERRAR");
 		btnCerrarIV.setForeground(Color.BLACK);
 		btnCerrarIV.setBackground(new Color(192, 192, 192));
 		btnCerrarIV.setFont(new Font("Tahoma", Font.BOLD, 20));
-		btnCerrarIV.setBounds(286, 355, 128, 61);
+		btnCerrarIV.setBounds(286, 378, 128, 61);
 		contentPane.add(btnCerrarIV);
+		
 		
 		
 	}
