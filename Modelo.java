@@ -98,8 +98,3 @@ public class Modelo
 		J.updateRegistroFile();
 	}
 	
-
-	
-	
-}
-
